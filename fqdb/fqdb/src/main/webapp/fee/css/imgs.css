@@ -1,0 +1,280 @@
+/* CSS Version Default */
+/* Version: 2.0  || Date: 2013-04-17 || Author: Cathy */
+/* Cascading Style Sheets Level 2 Revision 1 */
+@charset "utf-8";
+body {
+	background-color: #e0e3ed;
+	background-image:url(default/images/bg.png);
+}
+.table_1, .tree, #content, .bor{
+	background-color:#fff;
+}
+
+.bar, footer, .table_1 thead td, .bar ul.select, .bar ul.select li.selected{
+	background-image:url(default/images/bar_bg.png);
+	background-repeat:repeat-x;
+}
+.table_1 thead a i{
+	background-image:url(default/images/icon_1.png);
+	background-repeat:no-repeat;
+}
+.table_1 a.open, .table_1 a.close, .bar h3{
+	background-image:url(default/images/icon_2.png);
+	background-repeat:no-repeat;
+}
+
+.bar, footer{
+	border-top:#bfcfda 1px solid;
+}
+.bar ul.select{
+	border-color: #ccd1dd #d0d4df #d1d4df;
+}
+.bar ul.select li.selected{
+	border-color: #dbdfeb #d0d4df #babec9;
+}
+.bar ul.select li a{
+	text-shadow:0 1px 0 #fff;
+	color:#737c93;
+}
+.bar ul.select li.selected a{
+	color:#62abe2;
+}
+.bar h3{
+	color:#737c93;
+}
+/*.search_1{
+	background-image:url(default/images/search_bg.png);
+}*/
+.sandglass, .search_1, .tips{
+	border-top:#bfcfda 1px solid;
+	color:#606060;
+}
+.table_1, #content, .tree{
+	border-top:#bfcfda 1px solid;
+}
+.table_1 thead td{
+	border-left:#f6f7fa 1px solid;
+	border-right:#bfcfda 1px solid;
+	box-shadow:0 2px 0 #ececec;
+	color:#595f81;
+	text-shadow:0 1px 0 #fff;
+}
+.table_1 thead a{
+	color:#4558b3;
+}
+.table_1 thead td, .table_1 tbody td, #content{
+	border-bottom:#bfcfda 1px solid;
+}
+.table_1 tbody td, .table_1 thead a:hover{
+	color:#4e5367;
+}
+
+.table_1 tbody tr:hover td, .table_1 tbody tr.selected td{
+	background:#ffffd4;
+}
+.table_1 tbody td a{
+	color:#c21313;
+}
+.table_1 tbody td a:hover{
+	color:#808080;
+}
+
+/*tree*/
+.tree{
+	border-right:#bfcfda 1px solid;
+}
+/*tree end*/
+
+/*border*/
+.b_bor{
+	border-bottom:#d1d1d1 1px solid;
+}
+.lable_bg{
+	background:#f7f9fc;
+}
+/*border end*/
+
+
+/*login*/
+.login{
+	background-image:url(default/images/loginbg/CivilAircraft_002019.jpg);}
+.login .logo{
+	background:url(default/images/logo.png) left top no-repeat;
+}
+.login .form_bg{
+	background:url(default/images/login_bg1.png) left top no-repeat;
+}
+.login h2{
+	border-bottom:#ff8a00 2px solid;
+}
+.login h3{
+	color:#d0d0d0;
+}
+.login h4{
+	color:#f0f0f0;
+}
+.login label{
+	color:#464646;
+}
+.login input[type="text"], .login input[type="password"]{
+	background-color:#fbfbfb;
+}
+.login input[type="checkbox"]{
+	color:#ff8a00;
+}
+.login button, .login input[type="button"]{
+	background:#ff9600;
+	color:#fff;
+	text-shadow:#bc6600 0 1px 1px;
+}
+.login button:hover, .login input[type="button"]:hover{
+	background:#ff7800;
+}
+
+/*login end*/
+
+/*header*/
+header{
+	border-bottom:#d5d5d5 1px solid;
+	background:url(default/images/epms_logo.png) left top no-repeat;
+}
+header.mini{
+	background:url(default/images/index_epms_4_03.png) left top no-repeat;
+}
+header menu .tabs_1{
+	border-bottom:#d5d5d5 1px solid;
+}
+header menu .tabs_1 li:hover, header menu .tabs_1 li.selected{
+	background:#fff;
+	border-top:#d9d9d9 1px solid;
+	border-left:#d9d9d9 1px solid;
+	border-right:#d9d9d9 1px solid;
+}
+header menu .tabs_1 li a{
+	color:#212121;
+}
+header menu .tabs_1 li:hover a, header menu .tabs_1 li.selected a{
+	color:#ff8711;
+}
+header nav{
+	background:#fff url(default/images/nav_bg.png) left 57px repeat-x;
+}
+header nav ul{
+	background:url(default/images/menu_bg.png) right bottom no-repeat;
+}
+header nav li.big{
+	border-right:#dcdcdc 1px solid;
+}
+header nav dl:hover dt, header nav dl.selected dt{
+	background:#ffebb5;
+}
+header nav dd{
+	background:#f8f8f8;
+}
+header nav dl:hover dd, header nav dl.selected dd{
+	background:#ffba00;
+}
+/*header end*/
+/* 2013-08-08 profile */
+.profile .panel_1{
+	border: #e5e5e5 2px solid;
+	box-shadow: 0px 0px 5px #c1c1c1;
+	-webkit-box-shadow:0px 0px 5px #c1c1c1;
+	-moz-box-shadow:0px 0px 5px #c1c1c1;
+}
+.profile .panel_1 header{
+	background: #f7f7f7;
+	border-bottom: #dcdcdc 1px solid;
+}
+.profile .panel_1 header h3{
+	color: #909090；
+}
+.profile h5, .profile h6{
+	color: #c9c9c9;
+}
+.profile .f14{
+	color: #666666;
+}
+.role_1, .role_2, .role_3, .notice_date{
+	background-image: url(default/images/role_01.png);
+}
+.role_1 i, .role_2 i, .role_3 i{
+	color: #fff;
+}
+.role_1 i{
+	background: #ffa200;
+}
+.role_2 i{
+	background: #e635c3;
+}
+.role_3 i{
+	background: #2fa6ea;
+}
+.border1{
+	border: #ffa200 1px solid;
+}
+.border2{
+	border: #e635c3 1px solid;
+}
+.border3{
+	border: #2fa6ea 1px solid;
+}
+.notice_date span{
+	background: #fff;
+	color: #565656;
+}
+.gzzz{
+	background: #f3f3f3;
+}
+ul.qlink li{
+	background-color: #f7f7f7;
+	color: #282828;
+}
+ul.qlink li:hover, ul.qlink li.selected{
+	background-color: #90b52b;
+	color: #fff;
+}
+ul.qlink li a{
+	color: #282828;
+}
+ul.qlink li:hover a, ul.qlink li.selected a{
+	color: #fff;
+}
+ul.alert li{
+	border-bottom: #e2e2e2 1px solid;
+}
+ul.alert dt.a1{
+	background-color: #e1edf9;
+}
+ul.alert dt.a2{
+	background-color: #e8f6cf;
+}
+/*ul.alert dt.a3{
+	background-color: #137bdb;
+}
+ul.alert dt.a4{
+	background-color: #72af08;
+}*/
+ul.alert dt{
+	color: #222;
+}
+ul.alert dt .flight, ul.alert dt .service{
+	background-image:url(default/images/icon.png); 
+	background-repeat: no-repeat;
+}
+
+ul.contact li{
+	box-shadow: 2px 2px 1px #c9c9c9;
+	background:#f5f5f5;
+	*border:#c9c9c9 1px solid;
+}
+ul.contact dt{
+	background: #fff;
+	border: #cacaca 1px solid;
+}
+ul.contact dt a{
+	background-image: url(default/images/online.png);
+}
+ul.mypro li, ul.qlink li a i{
+	background-image: url(default/images/icon2.png);
+}

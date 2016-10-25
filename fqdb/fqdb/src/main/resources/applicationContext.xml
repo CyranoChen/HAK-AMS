@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.1.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+       http://www.springframework.org/schema/jee
+       http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+       http://www.springframework.org/schema/jdbc
+       http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+       
+       
+       <context:property-placeholder location="classpath:database.properties"/>
+       
+       <context:component-scan base-package="com.nlia.fqdb" />  
+        <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource"
+       	p:driverClass="${jdbc.db.driver}"
+       	p:url="${jdbc.db.url}"
+       	p:username="${jdbc.db.username}"
+       	p:password="${jdbc.db.password}"
+       />
+       <util:properties id="jpaProperties">
+       	<!--prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop-->
+       	<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+       	<prop key="hibernate.show_sql">false</prop>
+       	<prop key="hibernate.format_sql">true</prop>
+       	<!-- <prop key="hibernate.hbm2ddl.auto">update</prop> -->
+       	<prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
+       </util:properties>
+      
+      <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+      	<property name="dataSource" ref="dataSource"/>
+      	<property name="persistenceProviderClass" value="org.hibernate.ejb.HibernatePersistence"/>
+      	<property name="packagesToScan">
+			<list>
+				<value>com.nlia.fqdb.entity</value>
+				<value>com.nlia.fqdb.vo</value>
+				<value>com.nlia.obcs.entity</value>
+				<value>com.nlia.obcs.vo</value>
+			</list>
+		</property>
+      	<property name="jpaProperties" ref="jpaProperties"/>
+      </bean>
+      
+      <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+      	p:entityManagerFactory-ref="entityManagerFactory">
+      </bean>
+
+	   <tx:annotation-driven proxy-target-class="true" transaction-manager="transactionManager"/>
+	 <!-- <bean id="clientCallRemoteFlightBaseManager" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+         <property name="serviceUrl" value="http://localhost:8080/fqdb/FlightBaseManager" />
+         <property name="serviceInterface" value="com.nlia.fqdb.service.IClientFlightBaseManager" />
+     </bean>   -->
+     
+     
+     <!-- add by wangsq 20151129 --> 
+     <!-- 配置jdbcTemplate模板 --> 
+	  <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+	    	<property name="dataSource" ref="dataSource" />
+	  </bean>
+     
+     
+</beans>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="fqdb">
+		<class>com.nlia.fqdb.vo.RuleSingleExpression</class>
+		<class>com.nlia.fqdb.vo.RuleGroup</class>
+		<class>com.nlia.fqdb.util.AbstractPersistable</class>
+		<class>com.nlia.fqdb.util.AbstractDw</class>
+		<class>com.nlia.fqdb.entity.base.Terminal</class>
+		<class>com.nlia.fqdb.entity.base.Taxiway</class>
+		<class>com.nlia.fqdb.entity.base.Stand</class>
+		<class>com.nlia.fqdb.entity.base.Runway</class>
+		<class>com.nlia.fqdb.entity.base.PassengerClass</class>
+		<class>com.nlia.fqdb.entity.base.Handler</class>
+		<class>com.nlia.fqdb.entity.base.Gate</class>
+		<class>com.nlia.fqdb.entity.base.DelayCode</class>
+		<class>com.nlia.fqdb.entity.base.CheckInDesk</class>
+		<class>com.nlia.fqdb.entity.base.BaggageReclaim</class>
+		<class>com.nlia.fqdb.entity.base.BaggageMakeup</class>
+		<class>com.nlia.fqdb.entity.base.Airport</class>
+		<class>com.nlia.fqdb.entity.base.Airline</class>
+		<class>com.nlia.fqdb.entity.base.AircraftType</class>
+		<class>com.nlia.fqdb.entity.base.Country</class>
+		<class>com.nlia.fqdb.entity.base.FlightOperationCode</class>
+		<class>com.nlia.fqdb.entity.base.FlightServiceType</class>
+		<class>com.nlia.fqdb.entity.base.Aircraft</class>
+		<class>com.nlia.fqdb.entity.PairFlight</class>
+		<class>com.nlia.fqdb.entity.FlightResource</class>
+		<class>com.nlia.fqdb.entity.FlightMateInfo</class>
+		<class>com.nlia.fqdb.entity.FlightData</class>
+		<class>com.nlia.fqdb.entity.FlightBase</class>
+		<class>com.nlia.fqdb.entity.ChargeType</class>
+		<class>com.nlia.fqdb.entity.ChargeTerm</class>
+		<class>com.nlia.fqdb.entity.ChargeTarget</class>
+		<class>com.nlia.fqdb.entity.ChargeSubject</class>
+		<class>com.nlia.fqdb.entity.AircraftAirlineAlteration</class>
+		<class>com.nlia.fqdb.entity.ResourceKey</class>
+		<class>com.nlia.fqdb.entity.FlightView</class>
+		<class>com.nlia.fqdb.entity.SyntheticChargeTerm</class>
+		<class>com.nlia.obcs.vo.AlarmMode</class>
+		<class>com.nlia.obcs.entity.AlarmType</class>
+		<class>com.nlia.obcs.entity.AlarmModeAndStaffRelation</class>
+		<class>com.nlia.obcs.entity.AlarmModeAndInfoRelation</class>
+		<class>com.nlia.obcs.entity.AlarmInformation</class>
+		<class>com.nlia.fqdb.entity.FlightLoadData</class>
+		<class>com.nlia.fqdb.entity.ChargeTermDBView</class>
+		<class>com.nlia.fqdb.entity.SyntheticChargeTermDBView</class>
+	</persistence-unit>
+</persistence>

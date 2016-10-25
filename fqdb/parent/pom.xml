@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.wonders.nlia</groupId>
+	<artifactId>nlia-parent</artifactId>
+	<packaging>pom</packaging>
+	<version>2.0-SNAPSHOT</version>
+	<name>NLIA-PARENT</name>
+
+	<properties>
+
+		<spring.version>3.1.2.RELEASE</spring.version>
+		<hibernate.version>4.1.7.Final</hibernate.version>
+		<jackson.version>2.0.6</jackson.version>
+		<slf4j.version>1.7.1</slf4j.version>
+		<h2.version>1.3.172</h2.version>
+		<jetty.version>8.1.7.v20120910</jetty.version>
+
+		<!-- jdbc 数据库驱动程序 -->
+		<jdbc.driver.groupId>com.h2database</jdbc.driver.groupId>
+		<jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
+		<jdbc.driver.version>${h2.version}</jdbc.driver.version>
+
+		<!-- jdbc 数据库连接属性 -->
+		<jdbc.db.driver>org.h2.Driver</jdbc.db.driver>
+		<jdbc.db.url>jdbc:h2:~/nliadb</jdbc.db.url>
+		<jdbc.db.username>sa</jdbc.db.username>
+		<jdbc.db.password></jdbc.db.password>
+
+		<logger.level>INFO</logger.level>
+
+		<hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
+		<hibernate.show_sql>true</hibernate.show_sql>
+		<hibernate.format_sql>true</hibernate.format_sql>
+		<hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
+
+		<jdk.version>1.7</jdk.version>
+		<CATALINA_HOME>E:/apache-tomcat-7.0.37</CATALINA_HOME>
+
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencyManagement>
+
+		<dependencies>
+
+			<!-- 机场二代产品核心框架代码 -->
+			<dependency>
+				<groupId>com.wonders.nlia</groupId>
+				<artifactId>aiis-framework</artifactId>
+				<version>${project.version}</version>
+
+			</dependency>
+
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<!-- httpclient -->
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>4.2.5</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>fluent-hc</artifactId>
+				<version>4.2.5</version>
+			</dependency>
+
+			<!-- JGantt -->
+			<!-- <dependency>
+				<groupId>de.netronic</groupId>
+				<artifactId>JGantt</artifactId>
+				<version>1.0</version>
+			</dependency> -->
+
+			<!-- activeMQ -->
+			<dependency>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-all</artifactId>
+				<version>5.7.0</version>
+			</dependency>
+
+			<!-- spring jms -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jms</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<!-- web layer begin -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${spring.version}</version>
+
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${spring.version}</version>
+
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson.version}</version>
+
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.datatype</groupId>
+				<artifactId>jackson-datatype-hibernate4</artifactId>
+				<version>2.0.5</version>
+
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-mapper-asl</artifactId>
+				<version>1.9.12</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>2.5</version>
+
+			</dependency>
+
+			<dependency>
+				<groupId>jstl</groupId>
+				<artifactId>jstl</artifactId>
+				<version>1.2</version>
+
+			</dependency>
+			<!-- web layer end -->
+
+			<!-- database access layer begin -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-core</artifactId>
+				<version>${hibernate.version}</version>
+
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-entitymanager</artifactId>
+				<version>${hibernate.version}</version>
+
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-envers</artifactId>
+				<version>${hibernate.version}</version>
+
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate.javax.persistence</groupId>
+				<artifactId>hibernate-jpa-2.0-api</artifactId>
+				<version>1.0.1.Final</version>
+
+			</dependency>
+
+			<!-- spring oxm -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-oxm</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jdbc</artifactId>
+				<version>${spring.version}</version>
+
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-tx</artifactId>
+				<version>${spring.version}</version>
+
+			</dependency>
+
+			<dependency>
+				<groupId>${jdbc.driver.groupId}</groupId>
+				<artifactId>${jdbc.driver.artifactId}</artifactId>
+				<version>${jdbc.driver.version}</version>
+
+			</dependency>
+			<!-- database access layer end -->
+
+			<!-- utils begin -->
+			<!-- jsr 330 -->
+			<dependency>
+				<groupId>javax.inject</groupId>
+				<artifactId>javax.inject</artifactId>
+				<version>1</version>
+
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.1</version>
+
+			</dependency>
+
+			<dependency>
+				<groupId>commons-collections</groupId>
+				<artifactId>commons-collections</artifactId>
+				<version>3.2.1</version>
+
+			</dependency>
+
+			<dependency>
+				<groupId>cglib</groupId>
+				<artifactId>cglib-nodep</artifactId>
+				<version>2.2.2</version>
+
+			</dependency>
+
+			<!-- poi -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml</artifactId>
+				<version>3.8</version>
+
+			</dependency>
+
+			<!-- json begin -->
+			<dependency>
+				<groupId>net.sf.json-lib</groupId>
+				<artifactId>json-lib</artifactId>
+				<version>2.4</version>
+				<classifier>jdk15</classifier>
+			</dependency>
+			<!-- json end -->
+
+			<!-- quartz -->
+			<dependency>
+				<groupId>quartz</groupId>
+				<artifactId>quartz</artifactId>
+				<version>1.5.2</version>
+			</dependency>
+
+			<!-- utils end -->
+
+			<!-- logging begin -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>${slf4j.version}</version>
+
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
+
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-simple</artifactId>
+				<version>${slf4j.version}</version>
+
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${slf4j.version}</version>
+
+			</dependency>
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>1.2.17</version>
+
+			</dependency>
+			<!-- logging end -->
+
+			<!-- jersey begin -->
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-bundle</artifactId>
+				<version>1.17</version>
+			</dependency>
+			<!-- jersey end -->
+
+			<!-- test begin -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.10</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${spring.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.easymock</groupId>
+				<artifactId>easymock</artifactId>
+				<version>3.1</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.dbunit</groupId>
+				<artifactId>dbunit</artifactId>
+				<version>2.4.8</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>com.h2database</groupId>
+				<artifactId>h2</artifactId>
+				<version>${h2.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<!-- test end -->
+			<dependency>
+				<groupId>jaxen</groupId>
+				<artifactId>jaxen</artifactId>
+				<version>1.1.4</version>
+			</dependency>
+
+			<dependency>
+				<groupId>saxpath</groupId>
+				<artifactId>saxpath</artifactId>
+				<version>1.0-FCS</version>
+			</dependency>
+
+			<!-- XBean Spring -->
+			<dependency>
+				<groupId>org.apache.xbean</groupId>
+				<artifactId>xbean-spring</artifactId>
+				<version>3.12</version>
+			</dependency>
+
+		</dependencies>
+
+
+	</dependencyManagement>
+
+	<build>
+
+		<finalName>${project.artifactId}</finalName>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<excludes>
+					<exclude>**/.svn/**</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/java</directory>
+				<filtering>true</filtering>
+				<excludes>
+					<exclude>**/.svn/**</exclude>
+				</excludes>
+				<includes>
+				<include>**/*.properties</include>
+				</includes>
+			</resource>
+		</resources>
+
+		<pluginManagement>
+
+			<plugins>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.5.1</version>
+					<configuration>
+						<source>${jdk.version}</source>
+						<target>${jdk.version}</target>
+						<optimize>true</optimize>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<version>2.9</version>
+					<configuration>
+						<downloadSources>true</downloadSources>
+						<sourceExcludes>
+							<sourceExclude>**/.svn/**</sourceExclude>
+						</sourceExcludes>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.12.3</version>
+					<configuration>
+						<forkMode>pertest</forkMode>
+						<argLine>
+							-Xms512m -Xmx1024m -XX:+CMSClassUnloadingEnabled -XX:+CMSPermGenSweepingEnabled
+						</argLine>
+						<testFailureIgnore>false</testFailureIgnore>
+						<skip>true</skip>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>2.1.2</version>
+					<executions>
+						<execution>
+							<id>attach-sources</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>jar-no-fork</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.mortbay.jetty</groupId>
+					<artifactId>jetty-maven-plugin</artifactId>
+					<version>${jetty.version}</version>
+					<configuration>
+						<webApp>
+							<contextPath>/${project.artifactId}</contextPath>
+						</webApp>
+						<useProvidedScope>true</useProvidedScope>
+					</configuration>
+				</plugin>
+
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-dependency-plugin
+										</artifactId>
+										<versionRange>[2.4,)</versionRange>
+										<goals>
+											<goal>copy-dependencies</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.4</version>
+					<executions>
+						<execution>
+							<id>copy-dependencies-to-tomcat-lib</id>
+							<phase>package</phase>
+							<goals>
+								<goal>copy-dependencies</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${CATALINA_HOME}/lib</outputDirectory>
+								<includeScope>provided</includeScope>
+								<excludeArtifactIds>servlet-api</excludeArtifactIds>
+								<silent>true</silent>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-pmd-plugin</artifactId>
+					<version>2.7.1</version>
+					<configuration>
+						<linkXref>true</linkXref>
+						<sourceEncoding>utf-8</sourceEncoding>
+						<targetJdk>${jdk.version}</targetJdk>
+						<rulesets>
+							<!-- Two rule sets that come bundled with PMD -->
+							<ruleset>/rulesets/braces.xml</ruleset>
+							<ruleset>/rulesets/strings.xml</ruleset>
+							<ruleset>/rulesets/codesize.xml</ruleset>
+							<ruleset>/rulesets/controversial.xml</ruleset>
+							<ruleset>/rulesets/coupling.xml</ruleset>
+							<ruleset>/rulesets/junit.xml</ruleset>
+						</rulesets>
+					</configuration>
+				</plugin>
+
+				<!--plugin> <groupId>com.atlassian.maven.plugins</groupId> <artifactId>maven-clover2-plugin</artifactId> 
+					<version>3.1.1</version> <configuration> <licenseLocation>D:/aiis/clover.license</licenseLocation> 
+					</configuration> </plugin -->
+
+			</plugins>
+
+		</pluginManagement>
+
+	</build>
+
+	<profiles>
+
+		<profile>
+			<id>mysql</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<property>
+					<name>database</name>
+					<value>mysql</value>
+				</property>
+			</activation>
+			<properties>
+				<hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect
+				</hibernate.dialect>
+
+				<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
+				<jdbc.driver.artifactId>mysql-connector-java
+				</jdbc.driver.artifactId>
+				<jdbc.driver.version>5.1.21</jdbc.driver.version>
+
+				<jdbc.db.driver>com.mysql.jdbc.Driver</jdbc.db.driver>
+				<jdbc.db.url>jdbc:mysql://localhost:3306/nliadb</jdbc.db.url>
+				<jdbc.db.username>root</jdbc.db.username>
+				<jdbc.db.password>root</jdbc.db.password>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>oracle</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>database</name>
+					<value>oracle</value>
+				</property>
+			</activation>
+			<properties>
+				<hibernate.dialect> org.hibernate.dialect.Oracle10gDialect
+				</hibernate.dialect>
+
+				<jdbc.driver.groupId>com.oracle</jdbc.driver.groupId>
+				<jdbc.driver.artifactId>ojdbc14</jdbc.driver.artifactId>
+				<jdbc.driver.version>10.2.0.3.0</jdbc.driver.version>
+
+				<jdbc.db.driver>oracle.jdbc.driver.OracleDriver</jdbc.db.driver>
+				<jdbc.db.url>>${database.url}</jdbc.db.url>
+				<jdbc.db.username>${database.username}</jdbc.db.username>
+				<jdbc.db.password>${database.password}</jdbc.db.password>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>production</id>
+			<activation>
+				<property>
+					<name>environment</name>
+					<value>production</value>
+				</property>
+			</activation>
+			<properties>
+				<logger.level>ERROR</logger.level>
+				<jndi.name>java:comp/env/jdbc/dbname</jndi.name>
+			</properties>
+		</profile>
+
+	</profiles>
+
+</project>

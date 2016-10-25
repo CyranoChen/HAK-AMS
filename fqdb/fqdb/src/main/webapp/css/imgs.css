@@ -1,0 +1,172 @@
+/* CSS Version Default */
+/* Version: 2.0  || Date: 2013-04-17 || Author: Cathy */
+/* Cascading Style Sheets Level 2 Revision 1 */
+@charset "utf-8";
+body {
+}
+.table_1, .sandglass, .search_1, .tips, .tree, #content{
+	background-color:#fff;
+}
+
+.bar, footer, .table_1 thead td, .bar ul.select, .bar ul.select li.selected{
+	background-image:url(default/images/bar_bg.png);
+	background-repeat:repeat-x;
+}
+.table_1 thead a i{
+	background-image:url(default/images/icon_1.png);
+	background-repeat:no-repeat;
+}
+.table_1 a.open, .table_1 a.close, .bar h3{
+	background-image:url(default/images/icon_2.png);
+	background-repeat:no-repeat;
+}
+
+.bar, footer{
+	border-top:#bfcfda 1px solid;
+}
+.bar ul.select{
+	border-color: #ccd1dd #d0d4df #d1d4df;
+}
+.bar ul.select li.selected{
+	border-color: #dbdfeb #d0d4df #babec9;
+}
+.bar ul.select li a{
+	text-shadow:0 1px 0 #fff;
+	color:#737c93;
+}
+.bar ul.select li.selected a{
+	color:#62abe2;
+}
+.bar h3{
+	color:#737c93;
+}
+/*.search_1{
+	background-image:url(default/images/search_bg.png);
+}*/
+.sandglass, .search_1, .tips{
+	border-top:#bfcfda 1px solid;
+	color:#606060;
+}
+.table_1, #content, .tree{
+	border-top:#bfcfda 1px solid;
+}
+.table_1 thead td{
+	border-left:#f6f7fa 1px solid;
+	border-right:#bfcfda 1px solid;
+	box-shadow:0 2px 0 #ececec;
+	color:#595f81;
+	text-shadow:0 1px 0 #fff;
+}
+.table_1 thead a{
+	color:#4558b3;
+}
+.table_1 thead td, .table_1 tbody td, #content{
+	border-bottom:#bfcfda 1px solid;
+}
+.table_1 tbody td, .table_1 thead a:hover{
+	color:#4e5367;
+}
+
+.table_1 tbody tr:hover td, .table_1 tbody tr.selected td{
+	background:#ffffd4;
+}
+.table_1 tbody td a{
+	color:#c21313;
+}
+.table_1 tbody td a:hover{
+	color:#808080;
+}
+
+/*tree*/
+.tree{
+	border-right:#bfcfda 1px solid;
+}
+/*tree end*/
+
+/*border*/
+.b_bor{
+	border-bottom:#d1d1d1 1px solid;
+}
+.lable_bg{
+	background:#f7f9fc;
+}
+/*border end*/
+
+
+/*login*/
+.login{
+	background-image:url(default/images/loginbg/CivilAircraft_002019.jpg);}
+.login .logo{
+	background:url(default/images/logo.png) left top no-repeat;
+}
+.login .form_bg{
+	background:url(default/images/login_bg1.png) left top no-repeat;
+}
+.login h2{
+	border-bottom:#ff8a00 2px solid;
+}
+.login h3{
+	color:#d0d0d0;
+}
+.login h4{
+	color:#f0f0f0;
+}
+.login label{
+	color:#464646;
+}
+.login input[type="text"], .login input[type="password"]{
+	background-color:#fbfbfb;
+}
+.login input[type="checkbox"]{
+	color:#ff8a00;
+}
+.login button, .login input[type="button"]{
+	background:#ff9600;
+	color:#fff;
+	text-shadow:#bc6600 0 1px 1px;
+}
+.login button:hover, .login input[type="button"]:hover{
+	background:#ff7800;
+}
+
+/*login end*/
+
+/*header*/
+header{
+	border-bottom:#d5d5d5 1px solid;
+	background:url(default/images/epms_logo.png) left top no-repeat;
+}
+header menu .tabs_1{
+	border-bottom:#d5d5d5 1px solid;
+}
+header menu .tabs_1 li:hover, header menu .tabs_1 li.selected{
+	background:#fff;
+	border-top:#d9d9d9 1px solid;
+	border-left:#d9d9d9 1px solid;
+	border-right:#d9d9d9 1px solid;
+}
+header menu .tabs_1 li a{
+	color:#212121;
+}
+header menu .tabs_1 li:hover a, header menu .tabs_1 li.selected a{
+	color:#ff8711;
+}
+header nav{
+	background:#fff url(default/images/nav_bg.png) left 57px repeat-x;
+}
+header nav ul{
+	background:url(default/images/menu_bg.png) right bottom no-repeat;
+}
+header nav li.big{
+	border-right:#dcdcdc 1px solid;
+}
+header nav dl:hover dt, header nav dl.selected dt{
+	background:#ffebb5;
+}
+header nav dd{
+	background:#f8f8f8;
+}
+header nav dl:hover dd, header nav dl.selected dd{
+	background:#ffba00;
+}
+/*header end*/

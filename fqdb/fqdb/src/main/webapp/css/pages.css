@@ -1,0 +1,283 @@
+/* CSS Version Default */
+/* Version: 2.0  || Date: 2013-04-17 || Author: Cathy */
+/* Cascading Style Sheets Level 2 Revision 1 */
+@charset "utf-8";
+.body {
+}
+
+/*header*/
+header{
+	padding-bottom:1px;
+	padding-left:242px;
+	padding-top:13px;
+	height:101px;
+}
+header menu .tabs_1{
+	height:25px;
+	line-height:24px;
+	font-size:11px;
+}
+header menu .tabs_1 li:hover, header menu .tabs_1 li.selected{
+	height:25px;
+}
+header menu .tabs_1 li{
+	padding:0 8px;
+	margin:0 1px;
+}
+header menu li{
+	display:inline;
+	float:left;
+}
+header nav{
+	height:73px;
+}
+header nav li.big{
+	text-align:center;
+}
+header nav dt{
+	margin:5px 2px;
+	/*height:46px;*/
+	text-indent:-9999px;
+}
+header nav dt.big{
+	width:43px;
+	height:43px;
+	background-repeat:no-repeat;
+	padding:2px 4px;
+}
+header nav dt.big img{
+	width:43px;
+	height:43px;
+}
+header nav dd{
+	height:18px;
+	line-height:17px;
+	padding:0 5px;
+}
+/*header end*/
+
+/*bar*/
+.bar{
+	height:27px;
+	padding:6px 8px;
+	line-height:27px;
+}
+.bar ul.select, .bar ul.select li.selected{
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-o-border-radius: 2px;
+	-ms-border-radius: 2px;
+	-khtml-border-radius: 2px;
+	border-radius: 2px;
+	border: 1px solid;
+}
+.bar ul.select{
+	background-position:left -100px;
+	padding:1px;
+}
+.bar ul.select li.selected{
+	background-position:left -300px;
+	font-weight:bold;
+}
+.bar ul.select li, .bar ul.lit_but li{
+	height:21px;
+	line-height:21px;
+	text-shadow:#fff;
+	float:left;
+	display:inline-block;
+}
+.bar ul.select li:hover{
+	font-weight:bold;
+}
+.bar ul.select li a{
+	padding:0 8px;
+}
+.bar ul.lit_but li a{
+	text-indent:-9999px;
+	width:0;
+	height:0;
+	padding-left:16px;
+	padding-top:16px;
+	display:block;
+	margin-left:5px;
+	background:#000;
+}
+.bar h3{
+	background-position:left -32px;
+	padding-left:22px;
+}
+/*bar end*/
+
+/*filter*/
+.sandglass, .search_1, .tips{
+	background-position:right bottom;
+	background-repeat:no-repeat;
+	font-size:14px;
+}
+/*filter end*/
+
+/*footer*/
+footer{
+	height:30px;
+	line-height:29px;
+}
+/*footer end*/
+
+/*table_1*/
+.table_1{
+	font-size:11px;
+}
+.table_1 thead td{
+	height:29px;
+	line-height:28px;
+	padding:0 5px;
+	font-weight:bold;
+	white-space:nowrap;
+}
+.table_1 thead a, .table_1 thead a i{
+	display:block;
+}
+.table_1 thead a i{
+	float:right;
+	width:9px;
+	height:0;
+	padding-top:20px;
+	background-position:left 8px;
+}
+.table_1 thead a i.order{
+	background-position:left -23px;
+}
+.table_1 tbody td{
+	line-height:36px;
+	padding:0 5px;
+}
+.table_1 tbody td a{
+	margin-left:5px;
+	margin-right:5px;
+}
+.table_1 a.open, .table_1 a.close{
+	text-indent:-9999px;
+	width:0;
+	height:0;
+	padding-left:9px;
+	padding-top:6px;
+	display:block;
+	margin-top:15px;
+}
+.table_1 a.open{
+	background-position:left top;
+}
+.table_1 a.close{
+	background-position:left -11px;
+}
+.table_1 tfoot td{
+	box-shadow:0 2px 0 #ececec;
+	height:28px;
+	line-height:27px;
+	background:url(default/images/tf_bg.png) left top repeat-x;
+}
+/*table_1 end*/
+
+/*login*/
+.login{
+	background-repeat:no-repeat;
+	background-position:center -300px;
+}
+.login .body{
+	padding-top:120px;
+	width:980px;
+	margin:0 auto;
+}
+.login .logo{
+	height:82px;
+	width:335px;
+}
+.login .form_bg{
+	width:433px;
+	height:326px;
+	padding-left:1px;
+	padding-right:7px;
+}
+.login .form_bg hgroup{
+	border-bottom:#eee 1px solid;
+	line-height:50px;
+	padding-left:50px;
+	padding-top:8px;
+	margin-bottom:30px;
+}
+.login h2, .login h3, .login h4{
+	font-weight:normal;
+	margin-right:8px;
+}
+.login .form_bg .con{
+	padding:0 50px;
+	font-family:'Microsoft YaHei';
+}
+.login label{
+	line-height:32px;
+	font-size:18px;
+	*font-size:16px;
+}
+.login input[type="text"], .login input[type="password"], .login button, .login input[type="button"]{
+	width:265px;
+	height:31px;
+	line-height:30px;
+	margin-bottom:10px;
+	font-size:16px;
+	font-family:'Microsoft YaHei';
+}
+.login button, .login input[type="button"]{
+	border:none;
+	word-spacing:20px;
+	line-height:inherit;
+}
+
+/*login end*/
+
+
+/*tabs_2*/
+.tabs_2 li, .tabs_2 li a, .tabs_2 li a span{
+	background-image:url(default/images/tabs_2.png);
+	display:block;
+}
+.tabs_2{
+	border-bottom:#7eb375 2px solid;
+	height:22px;
+	padding-left:10px;
+}
+.tabs_2 li{
+	display:inline;
+	_display:inline-block;
+	_max-width:120px;
+	_min-width:32px;
+	/*_width:120px;*/
+	float:left;
+	margin-right:2px;
+	background-position:left top;
+	padding-left:21px;
+	background-repeat:no-repeat;
+}
+.tabs_2 li a{
+	background-position:right -48px;
+	background-repeat:no-repeat;
+	padding-right:12px;
+	height:22px;
+}
+.tabs_2 li a span{
+	background-position: left -24px;
+	background-repeat:repeat-x;
+	height:22px;
+	line-height:22px;
+}
+.tabs_2 li.selected, .tabs_2 li:hover{
+	background-position:left -72px;
+	height:24px;
+}
+.tabs_2 li.selected a, .tabs_2 li:hover a{
+	background-position:right -120px;
+	height:24px;
+}
+.tabs_2 li.selected a span, .tabs_2 li:hover a span{
+	background-position:right -96px;
+	height:24px;
+}

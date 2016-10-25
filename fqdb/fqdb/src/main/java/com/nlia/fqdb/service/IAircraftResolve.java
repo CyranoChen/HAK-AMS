@@ -1,0 +1,10 @@
+package com.nlia.fqdb.service;
+
+import com.nlia.fqdb.entity.base.Aircraft;
+import com.wonders.aiis.core.service.AbstractBaseService;
+
+public interface IAircraftResolve extends
+		AbstractBaseService<Aircraft, Long> {
+
+	
+}

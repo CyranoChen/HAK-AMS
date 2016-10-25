@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+xmlns:mvc="http://www.springframework.org/schema/mvc"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-3.1.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+ 
+<mvc:annotation-driven />
+ 
+<context:component-scan base-package="com.nlia.fqdb.controller" />
+ 
+<mvc:default-servlet-handler />
+<!-- 定义JSP文件的位置 -->
+<bean
+class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+<property name="prefix" value="/WEB-INF/views/" />
+<property name="suffix" value=".jsp" />
+</bean>
+ 
+<bean name="/RestfulDataManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="restfulDataManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IRestfulDataManager" />
+</bean>
+ 
+<bean name="/ChargeTermManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="chargeTermManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IChargeTermManager" />
+</bean>
+ 
+<!-- <bean name="/FlightMateManager" -->
+<!-- class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter"> -->
+<!-- <property name="service" ref="flightMateManager" /> -->
+<!-- <property name="serviceInterface" value="com.nlia.fqdb.service.IFlightMateManager" /> -->
+<!-- </bean> -->
+ 
+<!-- <bean name="/FlightServiceInfoManager" -->
+<!-- class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter"> -->
+<!-- <property name="service" ref="flightServiceInfoManager" /> -->
+<!-- <property name="serviceInterface" -->
+<!-- value="com.nlia.fqdb.service.IFlightServiceInfoManager" /> -->
+<!-- </bean> -->
+
+<bean name="/FlightMateInfoManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="flightMateInfoManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IFlightMateInfoManager" />
+</bean>
+ 
+<bean name="/ChargeTargetManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="chargeTargetManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IChargeTargetManager" />
+</bean>
+ 
+<bean name="/ChargeSubjectManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="chargeSubjectManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IChargeSubjectManager" />
+</bean>
+ 
+<bean name="/AircraftAirlineAlterationManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="aircraftAirlineAlterationManager" />
+<property name="serviceInterface"
+value="com.nlia.fqdb.service.IAircraftAirlineAlterationManager" />
+</bean>
+ 
+<bean name="/ChargeTypeManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="chargeTypeManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IChargeTypeManager" />
+</bean>
+ 
+<bean name="/ChargeUnitManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="chargeUnitManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IChargeUnitManager" />
+</bean>
+<bean name="/ChargeObjectManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="chargeObjectManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IChargeObjectManager" />
+</bean>
+<bean name="/FlightBaseManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="flightBaseManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IFlightBaseManager" />
+</bean>
+<bean name="/FlightDataManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="flightDataManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IFlightDataManager" />
+</bean>
+<bean name="/FlightResourceManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="flightResourceManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IFlightResourceManager" />
+</bean>
+ 
+<!-- <bean name="/SeasonFlightDataManager" -->
+<!-- class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter"> -->
+<!-- <property name="service" ref="seasonFlightDataManager" /> -->
+<!-- <property name="serviceInterface" -->
+<!-- value="com.nlia.fqdb.service.ISeasonFlightDataManager" /> -->
+<!-- </bean> -->
+<!--base table -->
+<bean name="/AircraftManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="aircraftManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IAircraftManager" />
+</bean>
+ 
+<bean name="/AircraftTypeManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="aircraftTypeManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IAircraftTypeManager" />
+</bean>
+ 
+<bean name="/AirlineManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="airlineManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IAirlineManager" />
+</bean>
+ 
+<bean name="/AirportManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="airportManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IAirportManager" />
+</bean>
+ 
+<bean name="/BaggageMakeupManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="baggageMakeupManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IBaggageMakeupManager" />
+</bean>
+ 
+<bean name="/BaggageReclaimManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="baggageReclaimManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IBaggageReclaimManager" />
+</bean>
+<bean name="/CheckInDeskManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="checkInDeskManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.ICheckInDeskManager" />
+</bean>
+ 
+<bean name="/DelayCodeManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="delayCodeManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IDelayCodeManager" />
+</bean>
+ 
+ 
+ 
+ 
+<bean name="/GateManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="gateManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IGateManager" />
+</bean>
+ 
+<bean name="/HandlerManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="handlerManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IHandlerManager" />
+</bean>
+ 
+<bean name="/PassengerClassManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="passengerClassManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IPassengerClassManager" />
+</bean>
+ 
+<bean name="/RunwayManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="runwayManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IRunwayManager" />
+</bean>
+ 
+<bean name="/StandManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="standManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IStandManager" />
+</bean>
+ 
+<bean name="/TerminalManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="terminalManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.ITerminalManager" />
+</bean>
+<!--  
+<bean name="/DwFlightTimesPeakManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="dwFlightTimesPeakManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IDwFlightTimesPeak" />
+</bean>
+
+<bean name="/DwDailyFreightVolumeManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="dwDailyFreightVolumeManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IDwDailyFreightVolume" />
+</bean>
+
+<bean name="/DwFlightPsgRatioManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="dwFlightPsgRatioManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IDwFlightPsgRatio" />
+</bean>
+
+
+<bean name="/DwAirportTrafficManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="dwAirportTrafficManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IDwAirportTraffic" />
+</bean>
+
+<bean name="/DwAnalysisOfTheStopFlightsManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="dwAnalysisOfTheStopFlightsManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IDwAnalysisOfTheStopFlights" />
+</bean>
+
+<bean name="/DwAverageDepartureGuestRateManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="dwAverageDepartureGuestRateManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IDwAverageDepartureGuestRate" />
+</bean>
+
+<bean name="/DwEntryAndExitPsgsServiceCompletionManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="dwEntryAndExitPsgsServiceCompletionManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IDwEntryAndExitPsgsServiceCompletion" />
+</bean>
+
+<bean name="/DwMarketingDepartment"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="dwMarketingDepartmentManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IDwMarketingDepartment" />
+</bean>
+ 
+ 
+<bean name="/DwPsgCapacityPeakManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="dwPsgCapacityPeakManager" />
+<property name="serviceInterface"
+value="com.nlia.fqdb.service.IDwPsgCapacityPeak" />
+</bean>
+ 
+<bean name="/DwCargoEmailCapacityPeakManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="dwCargoEmailCapacityPeakManager" />
+<property name="serviceInterface"
+value="com.nlia.fqdb.service.IDwCargoEmailCapacityPeakManager" />
+</bean>
+ 
+<bean name="/DwBusinessPeakManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="dwBusinessPeakManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IDwBusinessPeakManager" />
+</bean>
+ 
+<bean name="/DwDepartByDistrictManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="dwDepartByDistrictManager" />
+<property name="serviceInterface"
+value="com.nlia.fqdb.service.IDwDepartByDistrictManager" />
+</bean>
+--> 
+<!-- <bean name="/AirlineManager" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter"> 
+<property name="service" ref="airlineManager" /> <property name="serviceInterface" 
+value="com.nlia.fqdb.service.IAirlineManager" /> </bean> <bean name="/AircraftTypeManager" 
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter"> 
+<property name="service" ref="aircraftTypeManager" /> <property name="serviceInterface" 
+value="com.nlia.fqdb.service.IAircraftTypeManager" /> </bean> -->
+ 
+<!-- adder:zhuhaijian,20130701,begin -->
+<bean name="/baseDataParse"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="baseDataParse" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IBaseDataParse" />
+</bean>
+<bean name="/flightDataResolveOperateServiceOfFqdb"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="flightDataResolveOperateServiceOfFqdb" />
+<property name="serviceInterface"
+value="com.nlia.fqdb.service.IFlightDataResolveOperateServiceOfFqdb" />
+</bean>
+<!-- <bean name="/dataParseOfFqdb" -->
+<!-- class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter"> -->
+<!-- <property name="service" ref="dataParseOfFqdb" /> -->
+<!-- <property name="serviceInterface" value="com.nlia.fqdb.service.IDataParseOfFqdb" /> -->
+<!-- </bean> -->
+<!-- adder:zhuhaijian,20130701,end -->
+ 
+<!-- <bean name="/FlightInfoManager" -->
+<!-- class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter"> -->
+<!-- <property name="service" ref="flightInfoManager" /> -->
+<!-- <property name="serviceInterface" value="com.nlia.fqdb.service.IFlightInfoManager" /> -->
+<!-- </bean> -->
+ 
+<!-- <bean name="/DiscountRuleManager" -->
+<!-- class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter"> -->
+<!-- <property name="service" ref="discountRuleManager" /> -->
+<!-- <property name="serviceInterface" value="com.nlia.fqdb.service.IDiscountRuleManager" /> -->
+<!-- </bean> -->
+ 
+<!-- add by Ninja fqdb rcp-flightView -->
+<bean name="/FlightServiceTypeManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="flightServiceTypeManager" />
+<property name="serviceInterface"
+value="com.nlia.fqdb.service.IFlightServiceTypeManager" />
+</bean>
+<bean name="/FlightOperationCodeManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="flightOperationCodeManager" />
+<property name="serviceInterface"
+value="com.nlia.fqdb.service.IFlightOperationCodeManager" />
+</bean>
+ 
+<bean name="/SyntheticChargeTermManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="syntheticChargeTermManager" />
+<property name="serviceInterface"
+value="com.nlia.fqdb.service.ISyntheticChargeTermManager" />
+</bean>
+
+<bean name="/SyntheticChargeTermDBViewManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="syntheticChargeTermDBViewManager" />
+<property name="serviceInterface"
+value="com.nlia.fqdb.service.ISyntheticChargeTermDBViewManager" />
+</bean>
+
+<bean name="/ChargeTermDBViewManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="chargeTermDBViewManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IChargeTermDBViewManager" />
+</bean>
+ 
+<!-- fresh cache -->
+<bean name="/DataCache"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="dataCache" />
+<property name="serviceInterface" value="com.nlia.fqdb.configuration.IDataCache" />
+</bean>
+ 
+<!-- add by wan huaqiu -->
+ 
+<bean name="/AlarmTypeManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="alarmTypeManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IAlarmTypeManager" />
+</bean>
+ 
+<bean name="/AlarmInformationManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="alarmInformationManager" />
+<property name="serviceInterface"
+value="com.nlia.fqdb.service.IAlarmInformationManager" />
+</bean>
+<bean name="/AlarmModeAndInfoRelationManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="alarmModeAndInfoRelationManager" />
+<property name="serviceInterface"
+value="com.nlia.fqdb.service.IAlarmModeAndInfoRelationManager" />
+</bean>
+<bean name="/AlarmModeAndStaffRelationManager"
+class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="alarmModeAndStaffRelationManager" />
+<property name="serviceInterface"
+value="com.nlia.fqdb.service.IAlarmModeAndStaffRelationManager" />
+</bean>
+<bean name="/AlarmManager" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="alarmManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IAlarmManager" />
+</bean>
+<!-- <bean name="/MasterSlaveRelationManager" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter"> -->
+<!-- <property name="service" ref="masterSlaveRelationManager" /> -->
+<!-- <property name="serviceInterface" value="com.nlia.fqdb.service.IMasterSlaveRelationManager" /> -->
+<!-- </bean> -->
+<!-- <bean name="/UserOnLineManager" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter"> -->
+<!-- <property name="service" ref="userOnLineManager" /> -->
+<!-- <property name="serviceInterface" value="com.nlia.fqdb.service.IUserOnLineManager" /> -->
+<!-- </bean> -->
+<bean name="/FlightLoadDataManager" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="flightLoadDataManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IFlightLoadDataManager" />
+</bean>
+<bean name="/DiscountManager" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+<property name="service" ref="discountManager" />
+<property name="serviceInterface" value="com.nlia.fqdb.service.IDiscountManager" />
+</bean>
+</beans>
