@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/WebRoot/js/fqs/flightMateSearch.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WebRoot/static/uploadifive" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/wonders/frame/ams/bean/FlightMateListBean.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/wonders/frame/ams/controller/fqs/FlightMateSearchController.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/wonders/frame/ams/service/fqs/FlightMateSearchService.java" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>
