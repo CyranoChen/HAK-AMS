@@ -200,7 +200,7 @@ public class DiscountManagerController {
             }
         }
 
-        if(!Chk.numberCheck(discount)){
+        if(Chk.spaceCheck(discount) && ! Chk.numberCheck(discount)){
             return false;
         }
 

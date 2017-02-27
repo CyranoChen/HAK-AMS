@@ -59,7 +59,6 @@
                       id : "registration",
                       updaterow: function (rowid, newdata, commit) {
 
-
                         $.post(
                                 "./update",
                                 {
@@ -87,7 +86,7 @@
                     });
 
                     $("#grid").on('cellbeginedit', function (event) {
-                      datafield = event.args.datafield;
+                        datafield = event.args.datafield;
                     });
 
 

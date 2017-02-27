@@ -85,25 +85,26 @@ public class AircraftAirlineAlterationService {
 	}
 	
 	/**
-	 * @see 按ID查找
+	 *  按ID查找
 	 */
 	public AircraftAirlineAlteration findById(Long id){
 		return aircraftAirlineAlterationDao.findById(id);
 	}
 	
 	/**
-	 * @see 更新
+	 *  更新
 	 */				 
 	public ReturnObj<ILongIdRemoveFlagModel> update(HttpServletRequest req){
 		SingleModelParams smp = SingleParamsConvertUtil.getModelParams(AircraftAirlineAlteration.class, req);
 		String loginName = ((UserDto)req.getSession().getAttribute(Constant.LOGIN_USER)).getLoginName();
 		smp.addData("modifyUser",loginName);
 		smp.addData("modifyTime",DateUtil.getDateString());
+		smp.addData("validFlag", "1");
 		return basicCrudService.saveOrUpdate(smp);
 	}
 	
 	/**
-	 * @see 新增
+	 *  新增
 	 */
 	public ReturnObj<ILongIdRemoveFlagModel> save(HttpServletRequest req){
 		SingleModelParams smp = SingleParamsConvertUtil.getModelParams(AircraftAirlineAlteration.class, req);
@@ -111,6 +112,12 @@ public class AircraftAirlineAlterationService {
 		smp.addData("createUser",loginName);
 		smp.addData("createTime",DateUtil.getDateString());
 		smp.addData("removeFlag","1");
+		smp.addData("validFlag", "1");
+		smp.addData("basicDataID", req.getParameter("aircraftRegistration"));
+		smp.addData("originalAirline", req.getParameter("currentAirline"));
+		smp.addData("originalSubairline", req.getParameter("currentSubairline"));
+		smp.addData("isPackagingFacility", "N");
+
 		return basicCrudService.saveOrUpdate(smp);
 	}
 }

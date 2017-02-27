@@ -81,9 +81,27 @@ public class AmsGenericRepositoryImpl<T, ID extends Serializable> extends
 		}
 
 	}
-	
 
-	
+	@Override
+	public List<T> findAllExist() {
+		List<T> rs=this.findAll(new Specification<T>() {
+			@Override
+			public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query,
+										 CriteriaBuilder cb) {
+				query.where(cb.equal(root
+						.get("removeFlag"), 1));
+
+				return null;
+			}
+		});
+
+
+			return rs;
+
+	}
+
+
+
 	@Override
 	public Integer remove(T entity) {
 		if (entity != null) {

@@ -4,11 +4,9 @@ import com.wonders.frame.ams.bean.FlightLoadDataBean;
 import com.wonders.frame.ams.bean.FlightMateDetailBean;
 import com.wonders.frame.ams.bean.FlightMateFormBean;
 import com.wonders.frame.ams.bean.FlightMateListBean;
-import com.wonders.frame.ams.model.FlightMateInfo;
 import com.wonders.frame.ams.rmi.IFlightMateInfoManager;
 import com.wonders.frame.ams.service.fqs.FlightMateSearchService;
 import com.wonders.frame.ams.utils.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
-import java.net.URLEncoder;
 import java.util.*;
 
 /**
@@ -41,6 +38,13 @@ public class FlightMateSearchController {
     @Resource
     private IFlightMateInfoManager flightMateInfoManager;
 
+    @ResponseBody
+    @RequestMapping("addLoadData")
+    public Object addLoadData(){
+
+
+        return flightMateSearchService.getInsertSeq();
+    }
 
     @RequestMapping("index")
     public String index(HttpServletRequest request,String role) throws IOException {
@@ -130,10 +134,18 @@ public class FlightMateSearchController {
 
         List<FlightMateListBean> result = new ArrayList<FlightMateListBean>();
         if(Chk.spaceCheck(error)){
+
+            String [] errors = error.split(",");
+
+
+
             for(FlightMateListBean b : list){
                 b.getAlarmMessage();
-                if(b.getAlarmMessageCode().contains(error)){
-                    result.add(b);
+                for(String e : errors){
+                    if(b.getAlarmMessageCode().contains(e)){
+                        result.add(b);
+                        break;
+                    }
                 }
             }
             return result;
@@ -162,6 +174,13 @@ public class FlightMateSearchController {
 
 
     @ResponseBody
+    @RequestMapping("deleteLoadData")
+    public Object updateLoadData(HttpServletRequest request,Long id,String role){
+        return null;
+    }
+
+
+        @ResponseBody
     @RequestMapping("updateLoadData")
     public Object updateLoadData(HttpServletRequest request,Long id,Long loadDataId,String colname,String value,String role){
 
@@ -567,9 +586,105 @@ public class FlightMateSearchController {
 
 
     }
+    
+    
+    @ResponseBody
+    @RequestMapping("flightMatchByDate")
+    public Object flightMatchByDate(String startTime, String endTime){
+    	
+    	Map<String, Object> source = new HashMap<String, Object>();
 
+    	if( ! Chk.dateCheck2(startTime) || ! Chk.dateCheck2(endTime)){
+    		source.put("success", false);
+    		source.put("msg", "无效的日期");
+    		return source;
+        }
+    	
+        try{
+        	
+        	startTime = DateUtil.parseDate(startTime + " 05:00:00");
+        	
+        	endTime = DateUtil.addDay(DateUtil.parseDate(endTime + " 04:59:59"), 1, "yyyy-MM-dd HH:mm:ss");
+        	
+        	
+        	Map<String, Object> map = new HashMap<String,Object>(); 
+        	
+        	map.put("startTime", startTime);
+        	map.put("endTime", endTime);
+        	
+        	List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+        	
+        	int days = DateUtil.getDaysBetween(startTime, endTime) + 1;
+        	if(days > 8){
+        		
+        		
+        		while(days > 8){
+        			
+        			Map<String, String> m = new HashMap<String, String>();
+            		m.put("startTime", startTime);
+            		m.put("endTime", DateUtil.addDay(startTime.split(" ")[0]+ " 04:59:59", 8, "yyyy-MM-dd HH:mm:ss"));
+            		list.add(m);
+            		
+            		startTime = DateUtil.addDay(startTime, 8, "yyyy-MM-dd HH:mm:ss");
+            		days = DateUtil.getDaysBetween(startTime, endTime) + 1;
+            		
+            		if(days <= 8 && days > 1){
+            			
+            			m = new HashMap<String, String>();
+                		m.put("startTime", startTime);
+                		m.put("endTime", endTime);
+                		list.add(m);
+            		}
+            		
+            	}
+        		
+        	}else{
+        		
+        		Map<String, String> m = new HashMap<String, String>();
+        		m.put("startTime", startTime);
+        		m.put("endTime", endTime);
+        		list.add(m);
+        		
+        	}
+    		
+    		//System.out.println(ArrayUtil.join(list.toArray()));
+    		
+    		
+    		
+    		for(int i = 0; i < list.size(); i++){
+    			
+    			Map<String, String> m = list.get(i);
+    			
+    			//返回map键值对，数据类似："总计航班 ：347;生成：300;缺少对应连班：47;缺少机号：0;对应连班缺少机号：0;数据不完整：57;"
+    			Map<String,Object> rtn = flightMateInfoManager.flightMatedInfoInitByPeriod(DateUtil.parse(m.get("startTime"), "yyyy-MM-dd HH:mm:ss"), DateUtil.parse(m.get("endTime"), "yyyy-MM-dd HH:mm:ss"));
+                
+                Set<String> keys = rtn.keySet();
 
+                for(String key :keys){
+                	
+                	if(! Chk.spaceCheck(String.valueOf(map.get(key) == null ? "" : map.get(key)))){
+                		map.put(key, 0);
+                	}
+                	map.put(key, Integer.parseInt(String.valueOf(rtn.get(key))) +  Integer.parseInt(String.valueOf(map.get(key))));
 
+                }
+                
+    		}
+
+    		
+    		source.put("success", true);
+    		source.put("msg", map);
+    		return source;
+        }catch (Exception e){
+            e.printStackTrace();
+            source.put("success", false);
+    		source.put("msg", "配对异常");
+    		return source;
+        }
+
+    }
+    
+    
     @ResponseBody
     @RequestMapping("flightLoad")
     public Object flightLoad(String baseId){

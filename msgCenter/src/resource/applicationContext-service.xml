@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+    
+
+
+    <!--  hk test   
+
+	<bean id="fssDataParseService" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl" value="http://10.23.3.52/fqdb/flightDataResolveOperateServiceOfFqdb" />
+        <property name="serviceInterface" value="com.tsystems.nlia.fqdb.service.IFlightDataResolveOperateServiceOfFqdb" />
+    </bean>
+    
+    <bean id="bssDataParseService" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl" value="http://10.23.3.52/fqdb/baseDataParse" />
+        <property name="serviceInterface" value="com.tsystems.nlia.fqdb.service.IBaseDataParse" />
+    </bean>
+    
+     --> 
+    <!--  hk product -->
+
+	<bean id="fssDataParseService" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl" value="http://10.23.3.50/fqdb/flightDataResolveOperateServiceOfFqdb" />
+        <property name="serviceInterface" value="com.tsystems.nlia.fqdb.service.IFlightDataResolveOperateServiceOfFqdb" />
+    </bean>
+    
+    <bean id="bssDataParseService" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl" value="http://10.23.3.50/fqdb/baseDataParse" />
+        <property name="serviceInterface" value="com.tsystems.nlia.fqdb.service.IBaseDataParse" />
+    </bean>
+   
+   
+        <!--  hk 863   
+
+	<bean id="fssDataParseService" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl" value="http://10.1.40.229/fqdb/flightDataResolveOperateServiceOfFqdb" />
+        <property name="serviceInterface" value="com.tsystems.nlia.fqdb.service.IFlightDataResolveOperateServiceOfFqdb" />
+    </bean>
+    
+    <bean id="bssDataParseService" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl" value="http://10.1.40.229/fqdb/baseDataParse" />
+        <property name="serviceInterface" value="com.tsystems.nlia.fqdb.service.IBaseDataParse" />
+    </bean>
+-->
+
+</beans>

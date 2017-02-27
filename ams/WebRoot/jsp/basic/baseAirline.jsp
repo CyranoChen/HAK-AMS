@@ -6,6 +6,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>航空公司</title>
 <%@include file="../../static/included.jsp"%>
+
+
+	<style type="text/css">
+		.jqx-cell{
+			height: 28px;
+		}
+	</style>
 <script type="text/javascript">
 
 	var role = "<%=request.getSession().getAttribute("role")%>";
@@ -22,7 +29,28 @@
 			return { message: "内容必须为1到10位的字母或数字!", result: false };
 		}
 		return true;
-	}
+	};
+
+	var length3Validation = function(cell,value){
+		if(value == ""){
+			return true;
+		}
+		var regx = /^[A-Za-z]{3}$/;
+		if(!regx.test(value)){
+			return { message: "内容必须为3位字母!", result: false };
+		}
+		return true;
+	};
+	var length2Validation = function(cell,value){
+		if(value == ""){
+			return true;
+		}
+		var regx = /^[A-Za-z]{2}$/;
+		if(!regx.test(value)){
+			return { message: "内容必须为2位字母!", result: false };
+		}
+		return true;
+	};
 	var airlinesMap = {};
 	var airlines;
 	var mode = null;
@@ -117,6 +145,7 @@
                 altRows: true,
                 showToolbar: true,
                 columnsResize:true,
+				autoRowHeight: false,
                 editSettings: {
                     saveOnPageChange: true,
                     saveOnBlur: false,
@@ -134,22 +163,21 @@
                     // appends buttons to the status bar.
                     var container = $("<div style='overflow: hidden; position: relative; height: 100%; width: 100%;'></div>");
                     var buttonTemplate = "<div style='float: left; padding: 3px; margin: 2px;'><div style='margin: 4px; width: 16px; height: 16px;'></div></div>";
-                    //var addButton = $(buttonTemplate);
+                    var addButton = $(buttonTemplate);
                     var editButton = $(buttonTemplate);
                     var deleteButton = $(buttonTemplate);
                     var cancelButton = $(buttonTemplate);
                     var updateButton = $(buttonTemplate);
-                    //container.append(addButton);
+                    container.append(addButton);
                     container.append(editButton);
                     container.append(deleteButton);
                     container.append(cancelButton);
                     container.append(updateButton);
                     toolBar.append(container);
-                    /*
+
                     addButton.jqxButton({cursor: "pointer", enableDefault: false,  height: 25, width: 25 });
                     addButton.find('div:first').addClass('jqx-icon-plus');
                     addButton.jqxTooltip({ position: 'bottom', content: "新增"});
-                    */
                     editButton.jqxButton({ cursor: "pointer", disabled: true, enableDefault: false,  height: 25, width: 25 });
                     editButton.find('div:first').addClass('jqx-icon-edit');
                     editButton.jqxTooltip({ position: 'bottom', content: "编辑"});
@@ -165,55 +193,75 @@
                     var updateButtons = function (action) {
                         switch (action) {
                             case "Select":
-                               // addButton.jqxButton({ disabled: false });
+                                addButton.jqxButton({ disabled: false });
                                 deleteButton.jqxButton({ disabled: false });
                                 editButton.jqxButton({ disabled: false });
                                 cancelButton.jqxButton({ disabled: true });
                                 updateButton.jqxButton({ disabled: true });
                                 break;
                             case "Unselect":
-                                //addButton.jqxButton({ disabled: false });
+                                addButton.jqxButton({ disabled: false });
                                 deleteButton.jqxButton({ disabled: true });
                                 editButton.jqxButton({ disabled: true });
                                 cancelButton.jqxButton({ disabled: true });
                                 updateButton.jqxButton({ disabled: true });
                                 break;
                             case "Edit":
-                                //addButton.jqxButton({ disabled: true });
+                                addButton.jqxButton({ disabled: true });
                                 deleteButton.jqxButton({ disabled: true });
                                 editButton.jqxButton({ disabled: true });
                                 cancelButton.jqxButton({ disabled: false });
                                 updateButton.jqxButton({ disabled: false });
                                 break;
                             case "End Edit":
-                                //addButton.jqxButton({ disabled: false });
+                                addButton.jqxButton({ disabled: false });
                                 deleteButton.jqxButton({ disabled: false });
                                 editButton.jqxButton({ disabled: false });
                                 cancelButton.jqxButton({ disabled: true });
                                 updateButton.jqxButton({ disabled: true });
                                 break;
                         }
-                    }
+                    };
+					var currentPageNum = 0;
+					$('#dataTable').on('pageChanged', function (event){
+						// event args.
+						var args = event.args;
+						// page num.
+						currentPageNum = args.pagenum;
+					});
+
                     var rowIndex = null;
                     $("#dataTable").on('rowSelect', function (event) {
                         var args = event.args;
                         rowIndex = args.index;
                         updateButtons('Select');
                     });
+
                     $("#dataTable").on('rowUnselect', function (event) {
+						$("#dataTable").jqxDataTable('endRowEdit', rowIndex, true);
                         updateButtons('Unselect');
                     });
+
                     $("#dataTable").unbind('rowEndEdit').on('rowEndEdit', function (event) {
-                      //编辑取消后不提交请求
-                    	if(mode == "edit-cancle"){
-                    		return;
-                    	}
-                        var selection = $("#dataTable").jqxDataTable('getSelection');
+						var selection = $("#dataTable").jqxDataTable('getSelection');
+						var data = event.args.row;
+						/*if(data && !data.id && !data.basicDataID) {
+							$("#dataTable").jqxDataTable('deleteRow', rowIndex);
+							return;
+						}*/
+
+						//编辑取消后不提交请求
+						if(mode == "edit-cancle"){
+							return;
+						}
+						console.log(selection.length);
                     	if(selection.length>0){
+
                     		var rowData = selection[0];
-                    		var url;
+							var url;
                     		if(rowData.id){
-                    			url="./updateAirline";
+								console.log("1");
+								url="./updateAirline";
                     		}else{
                     			url="./saveAirline";
                     		}
@@ -224,8 +272,10 @@
         	 	           				//alert(JSON.stringify(obj));
         		                    	if(obj.info.success){
         		                    		alert("保存成功！");
+											search();
         		                    	}else{
         		                    		alert("保存失败！");
+
         		                    	}     		
         	 	                });	
                         }
@@ -235,24 +285,38 @@
                     $("#dataTable").on('rowBeginEdit', function (event) {
                         updateButtons('Edit');
                     });
-                    
-                    /*
-                    addButton.click(function (event) {
-                        if (!addButton.jqxButton('disabled')) {
-                            // add new empty row.
-                            $("#dataTable").jqxDataTable('addRow', null, {}, 'first');
-                            // select the first row and clear the selection.
-                            $("#dataTable").jqxDataTable('clearSelection');
-                            $("#dataTable").jqxDataTable('selectRow', 0);
-                            // edit the new row.
-                            $("#dataTable").jqxDataTable('beginRowEdit', 0);
-                            updateButtons('add');
-                        }
-                    });
-                    */
+
+
+					// 页面跳转的时候让新增的第一行进入编辑状态
+					$("#dataTable").unbind('bindingComplete').on('bindingComplete',function(event){
+						if(mode && mode=="add"){
+							mode=null;
+							$("#dataTable").jqxDataTable('addRow', '', {}, 'first');
+							$("#dataTable").jqxDataTable('beginRowEdit', 0);
+						}
+					});
+
+					addButton.click(function (event) {
+						if (!addButton.jqxButton('disabled')) {
+							mode = "add";
+							// add new empty row.
+							if(currentPageNum != 0){
+								$("#dataTable").jqxDataTable('goToPage', 0);
+							}else{
+								mode=null;
+								$("#dataTable").jqxDataTable('addRow', '', {}, 'first');
+								// select the first row and clear the selection.
+								$("#dataTable").jqxDataTable('clearSelection');
+								$("#dataTable").jqxDataTable('selectRow', 0);
+								// edit the new row.
+								$("#dataTable").jqxDataTable('beginRowEdit', 0);
+								updateButtons('add');
+							}
+						}
+					});
                     
                     cancelButton.click(function (event) {
-                        if (!cancelButton.jqxButton('disabled')) {
+						if (!cancelButton.jqxButton('disabled')) {
                             // cancel changes.
                         	if(null!=mode && mode=="edit"){
                             	mode = "edit-cancle";
@@ -261,11 +325,13 @@
                             updateButtons('End Edit');
                         }
                     });
+
                     updateButton.click(function (event) {
                         if (!updateButton.jqxButton('disabled')) {
                         	$("#dataTable").jqxDataTable('endRowEdit', rowIndex, false);
                         }
                     });
+
                     editButton.click(function () {
                         if (!editButton.jqxButton('disabled')) {
                         	mode = "edit";
@@ -275,7 +341,7 @@
                         		$.post(
             	 	           			"./queryAirlineById",
             		                    data = {
-            		           				id:rowData.id,
+            		           				id:rowData.id
             		         			},
             		                    function(obj){
             		                    	if(obj){
@@ -298,7 +364,7 @@
                     	           		   	$.post(
                     	 	           			"./removeAirline",
                     		                    data = {
-                    		           				id:rowData.id,
+                    		           				id:rowData.id
                     		         			},
                     		                    function(obj){
                     		                    	if(obj){
@@ -321,14 +387,14 @@
                 columns :[
 					{datafield:'id',align: "center", cellsalign:"center",text:"id",width:'100px',editable:false},
 			        {datafield:'basicDataID',align: "center", cellsalign:"center",text:"basicDataID",width:'120px',validation:stringValidation},
-			        {datafield:'airlineIATACode',align: "center", cellsalign:"center",text:"航空公司二字码",width:'120px',validation:stringValidation},
-			        {datafield:'airlineICAOCode',align: "center", cellsalign:"center",text:"航空公司三字码",width:'130px',validation:stringValidation},
+			        {datafield:'airlineIATACode',align: "center", cellsalign:"center",text:"航空公司二字码",width:'120px',validation:length2Validation},
+			        {datafield:'airlineICAOCode',align: "center", cellsalign:"center",text:"航空公司三字码",width:'130px',validation:length3Validation},
 			        {datafield:'airlineUniqueCode',align: "center", cellsalign:"center",text:"航空公司唯一标识",width:'150px',validation:stringValidation},
 			        {datafield:'airlineName',align: "center", cellsalign:"center",text:"航空公司名称",width:'240px'},
 			        {datafield:'airlineHomeCountry',align: "center", cellsalign:"center",text:"航空公司所属国家",width:'120px',validation:stringValidation},
 			        {datafield:'airlineAllianceGroup',align: "center", cellsalign:"center",text:"所属联盟",width:'60px'},
-			        {datafield:'airlineDescription',align: "center", cellsalign:"center",text:"航空公司描述",width:'100px'},
-			        {datafield:'parentAirline',align: "center", cellsalign:"center",text:"父航空公司",width:'240px',columntype: 'template',width:'240px',
+			        {datafield:'airlineDescription',align: "center", cellsalign:"center",text:"航空公司描述",width:'140px'},
+			        {datafield:'parentAirline',align: "center", cellsalign:"center",text:"父航空公司",width:'240px',columntype: 'template',
 			        	createEditor: function (row, cellvalue, editor, cellText, width, height) {
 	                        // construct the editor. 
 	                        editor.jqxDropDownList({
@@ -338,7 +404,7 @@
 	                        	searchMode : 'containsignorecase',
 	                        	source: airlines,
 	                        	displayMember: 'airlineName',
-	                        	valueMember: 'id', 
+	                        	valueMember: 'id',
 	                        	width: width,
 	                        	height: height
 	                        }).on('bindingComplete', function (event) {
@@ -395,11 +461,11 @@
 			<table border="0" cellspacing="0" cellpadding="0">
 			<tr>
 				<td class="lb"><label for="airlineIATACode">公司二字码</label></td>
-				<td><input id="airlineIATACode" class="formItem"></input></td>
+				<td><input id="airlineIATACode" class="formItem"/></td>
 				<td class="lb"><label for=airlineICAOCode>公司三字码</label></td>
-				<td><input id="airlineICAOCode" class="formItem"></input></td>
+				<td><input id="airlineICAOCode" class="formItem"/></td>
 				<td class="lb"><label for=airlineName>航空公司名称</label></td>
-				<td><input id="airlineName" class="formItem"></input></td>
+				<td><input id="airlineName" class="formItem"/></td>
 				<td class="lb">
 	              <input type="button" id="query_button" class="find mr8"  />
            		 </td>

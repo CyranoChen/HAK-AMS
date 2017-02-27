@@ -8,7 +8,7 @@
   <%@include file="../../static/included.jsp"%>
 <script type="text/javascript">
 $(function(){
-	$("#startTime,#endTime").jqxDateTimeInput({
+	/* $("#startTime,#endTime").jqxDateTimeInput({
         formatString: "yyyy-MM-dd",
         showCalendarButton: true,
         width: 110,
@@ -19,7 +19,24 @@ $(function(){
         showFooter: true,
         todayString: "今天",
         clearString: ""
+    }); */
+    
+    $("#scheduledTime").jqxDateTimeInput({
+        formatString: "yyyy-MM-dd",
+        showCalendarButton: true,
+        allowKeyboardDelete : false,
+        width: 200,
+        height: 25,
+        theme:"arctic",
+        culture: 'zh-CN',
+        allowNullDate: false,
+        showFooter: true,
+        selectionMode: 'range',
+        todayString: "今天",
+        clearString: ""
+        //value : "2016/08/01"
     });
+    
 	 $("#flightIdentity,#airLine,#registeration").jqxInput({ width: 70, height: 25,theme:"arctic",maxLength : 20 });
 	 $("#agent").jqxDropDownList({ width: 80, height: 25,theme:"arctic"});
 	$("#export_button").click(function (){
@@ -31,12 +48,20 @@ $(function(){
 	});
 	
 	var search=function(){
+		
+		var dateRange = $("#scheduledTime").val().split(" - ");
+		
+		if(new Date(dateRange[1]).getTime() - new Date(dateRange[0]).getTime() > 31*24*60*60*1000){
+            alert("日期最大跨度不允许超过31天");
+            return;
+        }
+		
 		var source = {
 	            url : "../report/querysigningResources",
 	            datatype : "json",
 	            data : {
-	            	startTime : $("#startTime").val(),
-	            	endTime : $("#endTime").val(),
+	            	startTime : dateRange[0],
+	            	endTime : dateRange[1],
 	            	flightIdentity : $("#flightIdentity").val(),
 	            	airLine : $("#airLine").val(),
 	            	registeration : $("#registeration").val(),
@@ -118,9 +143,7 @@ $(function(){
 				<table border="0" cellspacing="0" cellpadding="0">
 					<tr>
 						<td class="lb"><label for="scheduledTime">航班执行日:</label></td>
-						<td><div id="startTime" class="formItem"></div></td>
-						<td>-</td>
-						<td><div id="endTime" class="formItem"></div></td>
+						<td><div id="scheduledTime" class="formItem"></div></td>
 						<td class="lb"><label for="flightIdentity">航班号:</label></td>
 			            <td><input id="flightIdentity" class="formItem"/></td>
 			            <td class="lb"><label for="airLine">航空公司:</label></td>

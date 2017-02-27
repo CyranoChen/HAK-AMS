@@ -1,6 +1,7 @@
 package com.wonders.frame.ams.rmi;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +34,13 @@ public interface IFlightMateInfoManager {
     //返回map键值对，数据类似："总计航班 ：347;生成：300;缺少对应连班：47;缺少机号：0;对应连班缺少机号：0;数据不完整：57;"
     //id = base_id
     public Map<String, Object> flightMatedInfoInit(Long id);
+    
+    
+    //时间段航班配对
+    //返回map键值对，数据类似："总计航班 ：347;生成：300;缺少对应连班：47;缺少机号：0;对应连班缺少机号：0;数据不完整：57;"
+    //startTime = 开始日期
+    //endTime = 结束日期
+    public Map<String, Object> flightMatedInfoInitByPeriod(Date startTime, Date endTime);
 
 
 

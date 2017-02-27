@@ -2897,7 +2897,7 @@ of the horizontal scrollbar.*/
     padding: 0px;
     margin: 0px;
     background-color: transparent;
-    background-image: url(images/multi-arrow.gif);
+    background-image: url(images/multi-afrrow.gif);
 }
 .jqx-validator-error-label {
    color: #dd4b39;

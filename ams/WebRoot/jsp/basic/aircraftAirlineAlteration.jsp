@@ -227,7 +227,6 @@ $(function(){
 	                    addButton.jqxButton({cursor: "pointer",disabled: false,enableDefault: false,  height: 25, width: 25 });
 	                    addButton.find('div:first').addClass('jqx-icon-plus');
 	                    addButton.jqxTooltip({ position: 'bottom', content: "新增"});
-	                    
 	                    editButton.jqxButton({ cursor: "pointer", disabled: true, enableDefault: false,  height: 25, width: 25 });
 	                    editButton.find('div:first').addClass('jqx-icon-edit');
 	                    editButton.jqxTooltip({ position: 'bottom', content: "编辑"});
@@ -297,6 +296,7 @@ $(function(){
 	                        updateButtons('Unselect');
 	                    });
 	                    $("#dataTable").unbind('rowEndEdit').on('rowEndEdit', function (event) {
+
 	                    	var selection = $("#dataTable").jqxDataTable('getSelection');
 	                    	var data = event.args.row
 	                    	if(data && !data.id && !data.aircraftRegistration){
@@ -331,6 +331,7 @@ $(function(){
 	        		                    	if(obj.info.success){
 	        		                    		//$("#dataTable").jqxDataTable('updateBoundData');
 	        		                    		alert("保存成功！");
+												search();
 	        		                    		updateButtons('End Edit');
 	        		                    	}else{
 	        		                    		alert("保存失败！");
@@ -593,8 +594,8 @@ $(function(){
 		                   	 return editor.val();
 		                	}
 				        },
-				        {datafield:'aircraftTypeICAOCode',align: "center", cellsalign:"center",text:"机型三字码",width:'90px',validation: aircrafRegiTypeValidation},
-				        {datafield:'aircraftTypeIATACode',align: "center", cellsalign:"center",text:"机型二字码",width:'90px',validation: aircrafRegiTypeValidation},
+				        {datafield:'aircraftTypeICAOCode',align: "center", cellsalign:"center",text:"机型三字码",width:'90px'/*,validation: aircrafRegiTypeValidation*/},
+				        {datafield:'aircraftTypeIATACode',align: "center", cellsalign:"center",text:"机型二字码",width:'90px'/*,validation: aircrafRegiTypeValidation*/},
 				        {datafield:'basicDataID',align: "center", cellsalign:"center",text:"basicDataID",width:'90px',hidden:true},
 				        {datafield:'aircraftSeatCapacity',align: "center", cellsalign:"center",text:"最大客座数",width:'100px',validation: numValidation},
 				        {datafield:'aircraftTakeoffWeight',align: "center", cellsalign:"center",text:"最大起飞重量",width:'100px',validation: numValidation},
@@ -643,7 +644,7 @@ $(function(){
 		                   	 return editor.val();
 		                	}	
 		                },
-				        {datafield:'isPackagingFacility',align: "center", cellsalign:"center",text:"集装设备",width:'150px',hidden:"true"},
+				        {datafield:'isPackagingFacility',align: "center", cellsalign:"center",text:"集装设备",width:'150px',hidden:true},
 				        {datafield:'aircraftType',align: "center", cellsalign:"center",text:"飞机类型",width:'100px'},
 				        {datafield:'aircraftNoiseCategory',align: "center", cellsalign:"center",text:"噪音级别",width:'100px'},
 				        {datafield:'aircraftHeight',align: "center", cellsalign:"center",text:"高度",width:'120px',validation: numValidation},
@@ -655,7 +656,7 @@ $(function(){
 				        {datafield:'aircraftDescription',align: "center", cellsalign:"center",text:"描述说明",width:'120px'},
 				        {datafield:'aircraftLeasingAirline',align: "center", cellsalign:"center",text:"租赁航空公司",width:'150px'},
 				        {datafield:'validFlag',align: "center", cellsalign:"center",text:"有效标识",width:'120px',hidden:true},
-				        {datafield:'remark',align: "center", cellsalign:"center",text:"备注",width:'90px',hidden:"true"},
+				        {datafield:'remark',align: "center", cellsalign:"center",text:"备注",width:'90px',hidden:true},
 				        {datafield:'removeFlag',align: "center", cellsalign:"center",text:"删除标志",width:'120px',hidden:true},
 				        {datafield:'createUser',align: "center", cellsalign:"center",text:"创建人",width:'90px',hidden:"true"},
 				        {datafield:'createTime',align: "center", cellsalign:"center",text:"创建时间",width:'90px',hidden:true},

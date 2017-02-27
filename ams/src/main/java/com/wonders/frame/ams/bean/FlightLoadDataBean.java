@@ -28,6 +28,10 @@ public class FlightLoadDataBean {
     private String hw;
     private String wjhz;
     private String xljs;
+    private String legno;
+    private String generateMethod;
+
+
 
 
     public String getId() {
@@ -212,5 +216,21 @@ public class FlightLoadDataBean {
 
     public void setXljs(String xljs) {
         this.xljs = xljs;
+    }
+
+    public String getLegno() {
+        return legno;
+    }
+
+    public void setLegno(String legno) {
+        this.legno = legno;
+    }
+
+    public String getGenerateMethod() {
+        return generateMethod;
+    }
+
+    public void setGenerateMethod(String generateMethod) {
+        this.generateMethod = generateMethod;
     }
 }

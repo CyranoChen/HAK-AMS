@@ -67,16 +67,21 @@ public class DiscountManagerService {
             String sql = " delete from aircraft_discount where registration = ? and chargetype_id||','||chargesubject_id = ? ";
             baseDao.getJdbcTemplate().update(sql,registration,key);
 
-            String [] keys = key.split(",");
 
-            String typeId = keys[0];
-            String subjectId = keys.length > 1 ? keys[1] : null;
+            if(Chk.spaceCheck(discount)){
+                String [] keys = key.split(",");
 
-            sql = "insert into aircraft_discount(id,registration,chargetype_id,chargesubject_id,discount,remove_flag,charge_type_name,charge_subject_name)" +
-                    "  values (seq_insert.nextval,?,?,?,?,'1',(select name from charge_type where id = ? ),(select name from charge_subject where id = ?) )";
+                String typeId = keys[0];
+                String subjectId = keys.length > 1 ? keys[1] : null;
+
+                sql = "insert into aircraft_discount(id,registration,chargetype_id,chargesubject_id,discount,remove_flag,charge_type_name,charge_subject_name)" +
+                        "  values (seq_insert.nextval,?,?,?,?,'1',(select name from charge_type where id = ? ),(select name from charge_subject where id = ?) )";
 
 
-            baseDao.getJdbcTemplate().update(sql,registration,typeId,subjectId,discount,typeId,subjectId);
+                baseDao.getJdbcTemplate().update(sql,registration,typeId,subjectId,discount,typeId,subjectId);
+            }
+
+
 
         }catch (Exception e){
             e.printStackTrace();
@@ -116,7 +121,7 @@ public class DiscountManagerService {
                 "   and to_char(a.end_date,'yyyy') = '2099'  ";
 
 
-        sql += " left join base_airline ba  on ba.id = a.current_airline_id ";
+        sql += " left join base_airline ba  on ba.id = a.current_subairline_id ";
 
         if(Chk.spaceCheck(airlineOfFlight) && Chk.illegalCharacterCheck(airlineOfFlight)){
             sql += " where a.airline_of_flight like '%" + airlineOfFlight.toUpperCase() + "%' ";

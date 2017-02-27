@@ -49,4 +49,11 @@ public class BaseDao {
 
 
 
+    public Long getSeq(String seqName){
+        String sql = "select " + seqName + ".nextval SEQ from dual";
+        Map m = getJdbcTemplate().queryForMap(sql);
+        Long seq = Long.parseLong(m.get("SEQ").toString());
+        return seq;
+    }
+
 }

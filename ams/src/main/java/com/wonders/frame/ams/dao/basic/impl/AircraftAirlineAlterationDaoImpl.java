@@ -14,7 +14,9 @@ import com.wonders.frame.core.dao.MultiDao;
 import com.wonders.frame.core.model.vo.MultiQuerySqlElement;
 import com.wonders.frame.core.model.vo.PlaceholderParam;
 import com.wonders.frame.core.model.vo.SimplePage;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class AircraftAirlineAlterationDaoImpl {
 	
 	@Resource

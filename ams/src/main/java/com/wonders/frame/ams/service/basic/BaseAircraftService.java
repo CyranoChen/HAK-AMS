@@ -46,6 +46,7 @@ public class BaseAircraftService {
 		}
 		fliter.put("removeFlag", Constant.NOT_REMOVED);
 		sorter.put("aircraftRegistration", "asc");
+
 		SimplePage<BaseAircraft> baseAircrafts = baseAircraftDao.findByPage(fliter, sorter, pageNum, pageSize);
 		return baseAircrafts;
 	}

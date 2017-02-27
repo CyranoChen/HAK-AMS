@@ -93,7 +93,7 @@ public class BaseAirlineService {
 	 */
 	public ReturnObj<ILongIdRemoveFlagModel> save(HttpServletRequest req){
 		SingleModelParams smp = SingleParamsConvertUtil.getModelParams(BaseAirline.class, req);
-		String loginName = req.getSession().getAttribute(Constant.LOGIN_USER).toString();
+		String loginName = ((UserDto)req.getSession().getAttribute(Constant.LOGIN_USER)).getLoginName();
 		smp.addData("createUser",loginName);
 		smp.addData("createTime",DateUtil.getDateString());
 		smp.addData("removeFlag","1");

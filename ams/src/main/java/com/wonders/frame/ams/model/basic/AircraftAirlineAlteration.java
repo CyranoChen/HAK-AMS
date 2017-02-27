@@ -73,12 +73,13 @@ public class AircraftAirlineAlteration implements ILongIdRemoveFlagModel {
 	@Column(name = "END_DATE")
 	private Date endDate;
 	
-//	/**
-//	 * 有效标识
-//	 */
-//	@Column(name = "VALID_FLAG", length = 1)
-//	private VALIDFLAG validFlag;
-	
+	/**
+	 * 有效标识
+	 */
+	@Column(name = "VALID_FLAG", length = 1)
+	private String validFlag;
+
+
 	private String remark;
 	
 //	public static enum VALIDFLAG {
@@ -179,13 +180,13 @@ public class AircraftAirlineAlteration implements ILongIdRemoveFlagModel {
 		this.endDate = endDate;
 	}
 
-//	public VALIDFLAG getValidFlag() {
-//		return validFlag;
-//	}
-//
-//	public void setValidFlag(VALIDFLAG validFlag) {
-//		this.validFlag = validFlag;
-//	}
+	public String getValidFlag() {
+		return validFlag;
+	}
+
+	public void setValidFlag(String validFlag) {
+		this.validFlag = validFlag;
+	}
 
 	public String getRemark() {
 		return remark;

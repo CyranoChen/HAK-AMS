@@ -30,6 +30,9 @@ public class FlightMateSearchService {
     private BaseDao baseDao;
 
 
+    public Long getInsertSeq(){
+        return baseDao.getSeq("hibernate_sequence");
+    }
 
 
     public String updateLoadData(Long id,String colname,String value){
@@ -85,7 +88,7 @@ public class FlightMateSearchService {
 
     public List<FlightLoadDataBean> queryByFlightMateInfoId(Long id){
         String sql = "select " +
-                "l.id,hd,hdfl,zdyz,zdzw,peyz,pezw,kgyz,kgzw,io,jcn,qjsj,cr,et,ye,crwh,etwh,yewh,xl,yj,hw,wjhz,xljs " +
+                "l.id,hd,hdfl,zdyz,zdzw,peyz,pezw,kgyz,kgzw,io,jcn,qjsj,cr,et,ye,crwh,etwh,yewh,xl,yj,hw,wjhz,xljs,l.legno,l.generate_method " +
                 " from flight_load_data l,flight_mate_info f where l.flight_base_id = f.flight_base_id and f.id = ? order by l.legno";
         return baseDao.queryForList(sql,FlightLoadDataBean.class,id);
     }

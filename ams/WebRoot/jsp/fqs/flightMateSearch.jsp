@@ -65,7 +65,11 @@
         background-color: #6699CC;
       }
 
-
+	  #matchByDate_btn{
+	  	background-image:url(../../static/wonders/css/default/images/link.png); 
+		background-repeat:no-repeat;
+		background-position:2px 3px;
+	  }
 
 
 
@@ -114,7 +118,7 @@
             <td class="lb"><label for="error">告警:</label></td>
             <td>
               <select id="error" class="formItem">
-                <option selected value="">全部</option>
+                <option selected value="">全部航班</option>
                 <option  value="0">缺少机位</option>
                 <option  value="1">缺少机号</option>
                 <option  value="2">缺少航空公司</option>
@@ -139,6 +143,7 @@
               <input type="button" id="query_button" class="find mr8"  />
               <input type="button" id="import" class="dr" title="舱单导入" />
               <input type="button" id="export" class="dc" title="航班导出" />
+              <input type="button" id="matchByDate_btn" title="航班配对" />
             </td>
           </tr>
         </table>
@@ -386,6 +391,8 @@
         <div>
           <div style="padding: 5px;">
             <button id="calLoadData">舱单保存</button>
+            <%--<button id="addLoadData">新增</button>--%>
+            <%--<button id="deleteLoadData">删除</button>--%>
           </div>
           <div id="loadData" role="1,2"></div>
         </div>

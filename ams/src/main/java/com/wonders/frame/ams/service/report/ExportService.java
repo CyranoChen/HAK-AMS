@@ -20,6 +20,8 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.Region;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +34,8 @@ public class ExportService {
 	ResourceUtil ru = new ResourceUtil();
     public void exportExcel(HttpServletResponse response,List<List<Map<String,Object>>> list,String name, String time){
     	String tit = ru.getProperty("report/exportCols", name + "_tit");
-		HSSFWorkbook wb = new HSSFWorkbook();
+        XSSFWorkbook wb = new XSSFWorkbook();
+//		HSSFWorkbook wb = new HSSFWorkbook();
 		String sheetName = ru.getProperty("report/exportCols", "sheetName");
 		String[] sheetNames = sheetName.split(",");
 		if(list.size()>1){
@@ -49,7 +52,7 @@ public class ExportService {
             response.setContentType("application/x-msdownloadoctet-stream");
             String wordName = URLEncoder.encode( time+tit, "UTF-8");
             response.setHeader("Content-disposition",
-                    "attachment;filename=" + wordName + ".xls");
+                    "attachment;filename=" + wordName + ".xlsx");
             ouputStream = response.getOutputStream();
             wb.write(ouputStream);
         } catch (IOException e) {
@@ -67,23 +70,23 @@ public class ExportService {
         }
     }
     
-    public void doExport(HSSFWorkbook wb,String tit,String sheetName,String name,List<Map<String,Object>> list,int sheetIndex){
+    public void doExport(XSSFWorkbook wb,String tit,String sheetName,String name,List<Map<String,Object>> list,int sheetIndex){
     	
         String colEn = ru.getProperty("report/exportCols", name + "_cols_En");
         String[] colsEn = colEn.split(",");
     	// 在webbook中添加一个sheet,对应Excel文件中的sheet
-        HSSFSheet sheet = wb.createSheet(sheetName);
+        XSSFSheet sheet = wb.createSheet(sheetName);
 		
-		HSSFFont font = wb.createFont();
+		XSSFFont font = wb.createFont();
         font.setFontName("宋体");
         font.setFontHeightInPoints((short) 10);
         font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);//加粗
-        
-        HSSFFont font1 = wb.createFont();
+
+        XSSFFont font1 = wb.createFont();
         font1.setFontName("宋体");
         font1.setFontHeightInPoints((short) 10);
         
-        HSSFCellStyle style = wb.createCellStyle();
+        XSSFCellStyle style = wb.createCellStyle();
         style.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 左
         style.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);// 竖直居中
         style.setWrapText(false);
@@ -92,8 +95,8 @@ public class ExportService {
         style.setBorderTop(HSSFCellStyle.BORDER_THIN);// 上边框
         style.setBorderRight(HSSFCellStyle.BORDER_THIN);// 右边框
         style.setFont(font1);
-        
-        HSSFCellStyle style1 = wb.createCellStyle();
+
+        XSSFCellStyle style1 = wb.createCellStyle();
         style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 居中
         style1.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);// 竖直居中
         style1.setWrapText(false);
@@ -104,11 +107,18 @@ public class ExportService {
         style1.setFont(font);
         
         //单元格合并
-        sheet.addMergedRegion(new Region(0,(short)0,0,(short)(colsEn.length-1)));
+        
+        int lastCol = colsEn.length-1 ;
+        
+        if("liquidationIncomeCalculation".equals(name) && sheetIndex == 2){
+        	lastCol = lastCol + 3;
+        }
+
+        sheet.addMergedRegion(new CellRangeAddress(0,0,(short)0,(short)lastCol));
         
         //表头
-        HSSFRow row = sheet.createRow(0);
-        HSSFCell cell = row.createCell(0);
+        XSSFRow row = sheet.createRow(0);
+        XSSFCell cell = row.createCell(0);
         cell.setCellValue(tit);
         cell.setCellStyle(style1);
         
@@ -120,17 +130,6 @@ public class ExportService {
             String[] _colsCn = colsCn[0].split(",");
             String[] colsCn_ = colsCn[1].split(",");
             String[] colUnits = colUnit.split(",");
-            
-            //单元格合并
-            for(int i=0;i<_colsCn.length;i++){
-            	sheet.addMergedRegion(new Region(1,(short)i,2,(short)i));
-            }
-            
-            
-            //单元格合并
-            for(int i=0;i<colsCn_.length;i++){
-            	sheet.addMergedRegion(new Region(1,(short)(_colsCn.length+(i*3)),1,(short)(_colsCn.length+2+(i*3))));
-            }
             
             
             row = sheet.createRow(1);
@@ -152,8 +151,7 @@ public class ExportService {
 	            
 	            cell = row.createCell(_colsCn.length+(i*3)+2);
 	            cell.setCellStyle(style1);
-	            
-	            
+
 	        }
 	        row = sheet.createRow(2);
 	        
@@ -184,10 +182,27 @@ public class ExportService {
 	        		row = sheet.createRow(i+3);
 	        		for(int j=0;j<colsEn.length;j++){
 	        			cell = row.createCell(j);
-	        			cell.setCellValue(list.get(i).get(colsEn[j])==null?"":list.get(i).get(colsEn[j]).toString());
+	        			String val = list.get(i).get(colsEn[j])==null?"":list.get(i).get(colsEn[j]).toString();
+	        			try {
+							double val_d = Double.parseDouble(val);
+							cell.setCellValue(val_d);
+						} catch (Exception e) {
+							// TODO: handle exception
+							cell.setCellValue(val);
+						}
 	        			cell.setCellStyle(style);
 	        		}
 	        	}
+	        	
+	        	for(int i=0;i<_colsCn.length;i++){
+	            	sheet.addMergedRegion(new CellRangeAddress(1,2,(short)i,(short)i));
+	            }
+	            
+	            
+	            //单元格合并
+	            for(int i=0;i<colsCn_.length;i++){
+	            	sheet.addMergedRegion(new CellRangeAddress(1,1,(short)(_colsCn.length+(i*3)),(short)(_colsCn.length+2+(i*3))));
+	            }
 	        }
         }
         else if(("manifest").equals(name)){
@@ -200,7 +215,7 @@ public class ExportService {
             	cell.setCellStyle(style1);
             }
             
-            HSSFRow row2 = sheet.createRow(2);
+            XSSFRow row2 = sheet.createRow(2);
             for(int i=0;i<colsEn.length;i++){
             	cell = row2.createCell(i);
             	cell.setCellStyle(style1);
@@ -208,15 +223,15 @@ public class ExportService {
             
           //单元格合并
             for(int i=0;i<5;i++){
-            	sheet.addMergedRegion(new Region(1,(short)i,2,(short)i));
+            	sheet.addMergedRegion(new CellRangeAddress(1,2,(short)i,(short)i));
             }
-            sheet.addMergedRegion(new Region(1,(short)5,1,(short)8));
-            sheet.addMergedRegion(new Region(1,(short)7,1,(short)10));
-            sheet.addMergedRegion(new Region(1,(short)11,1,(short)12));
-            sheet.addMergedRegion(new Region(1,(short)13,1,(short)14));
-            sheet.addMergedRegion(new Region(1,(short)15,1,(short)17));
-            sheet.addMergedRegion(new Region(1,(short)18,1,(short)21));
-            sheet.addMergedRegion(new Region(1,(short)22,2,(short)22));
+            sheet.addMergedRegion(new CellRangeAddress(1,1,(short)5,(short)8));
+            sheet.addMergedRegion(new CellRangeAddress(1,1,(short)9,(short)10));
+            sheet.addMergedRegion(new CellRangeAddress(1,1,(short)11,(short)12));
+            sheet.addMergedRegion(new CellRangeAddress(1,1,(short)13,(short)14));
+            sheet.addMergedRegion(new CellRangeAddress(1,1,(short)15,(short)17));
+            sheet.addMergedRegion(new CellRangeAddress(1,1,(short)18,(short)21));
+            sheet.addMergedRegion(new CellRangeAddress(1,2,(short)22,(short)22));
             
             //row = sheet.createRow(1);
         	cell = row.createCell(0);
@@ -283,7 +298,14 @@ public class ExportService {
 	        		row = sheet.createRow(i+3);
 	        		for(int j=0;j<colsEn.length;j++){
 	        			cell = row.createCell(j);
-	        			cell.setCellValue(list.get(i).get(colsEn[j])==null?"":list.get(i).get(colsEn[j]).toString());
+	        			String val = list.get(i).get(colsEn[j])==null?"":list.get(i).get(colsEn[j]).toString();
+	        			try {
+							double val_d = Double.parseDouble(val);
+							cell.setCellValue(val_d);
+						} catch (Exception e) {
+							// TODO: handle exception
+							cell.setCellValue(val);
+						}
 	        			cell.setCellStyle(style);
 	        		}
 	        	}
@@ -334,7 +356,14 @@ public class ExportService {
 	        		row = sheet.createRow(i+2);
 	        		for(int j=0;j<colsEn.length;j++){
 	        			cell = row.createCell(j);
-	        			cell.setCellValue(list.get(i).get(colsEn[j])==null?"":list.get(i).get(colsEn[j]).toString());
+	        			String val = list.get(i).get(colsEn[j])==null?"":list.get(i).get(colsEn[j]).toString();
+	        			try {
+							double val_d = Double.parseDouble(val);
+							cell.setCellValue(val_d);
+						} catch (Exception e) {
+							// TODO: handle exception
+							cell.setCellValue(val);
+						}
 	        			cell.setCellStyle(style);
 	        		}
 	        	}
@@ -342,6 +371,7 @@ public class ExportService {
         }
         //自适应宽度
         for(int i=0;i<colsEn.length;i++){
+        	//sheet.autoSizeColumn(i);
         	sheet.autoSizeColumn((short)i,true);
         }
     }

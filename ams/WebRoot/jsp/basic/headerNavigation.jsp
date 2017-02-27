@@ -6,9 +6,12 @@
 	<ul>
 		<li><a href="/ams/jsp/basic/aircraftAirlineAlteration">飞机所属航空公司维护</a></li>
 		<li><a href="/ams/jsp/basic/baseAirline">航空公司</a></li>
+		<li><a href="/ams/jsp/basic/baseDestination">目的地</a></li>
 		<li><a href="/ams/jsp/basic/baseStand">机位</a></li>
 		<li><a href="/ams/jsp/basic/baseAircraft">机号</a></li>
 		<li id="discountManagerBar"><a href="/ams/basic/discountManager/index">折扣</a></li>
+		<li><a href="/ams/jsp/basic/chargeType">收费类型</a></li>
+		<li><a href="/ams/jsp/basic/chargeSubject">收费项目</a></li>
 	</ul>
 </nav>
 
@@ -16,6 +19,7 @@
 
 	var h = window.document.location.href;
 	h = h.replace(Global.root + "/jsp/basic","");
+
 	var selecta = $("#headerNavigation a[href$='" + h +"']");
 	var x = selecta.parent("li");
 	var y = x.parent("ul").parent("li");

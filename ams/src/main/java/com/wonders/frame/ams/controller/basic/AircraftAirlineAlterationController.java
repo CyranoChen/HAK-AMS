@@ -116,9 +116,6 @@ public class AircraftAirlineAlterationController {
 //						sb.append("manifest_import_back_file");
 //					}
 
-
-
-
 					sb.append("<执行完成> \n");
 					sb.append(" 总共上传" + totalCount + "条数据 \n");
 					sb.append(" 成功更新" + successCount + "条\n");

@@ -218,6 +218,18 @@ public class Chk {
         String reg = "^\\d{4}-\\d{2}-\\d{2}(\\s{1}\\d{2}:\\d{2}:\\d{2})?$";
         return Pattern.matches(reg, str);
     }
+    
+    /*
+     * yyyy/mm/dd( hh:mi:ss)?
+     */
+    public static boolean dateCheck2(String str){
+        if( ! spaceCheck(str)){
+            return false;
+        }
+        String reg = "^\\d{4}/\\d{2}/\\d{2}(\\s{1}\\d{2}:\\d{2}:\\d{2})?$";
+        return Pattern.matches(reg, str);
+    }
+    
 
     private static boolean isMatch(String regex, String orginal) {
         if (! Chk.spaceCheck(orginal)) {

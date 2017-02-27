@@ -16,10 +16,6 @@
 
 <body style="padding: 10px;min-width: 1024px;">
 
-
-
-
-
   <div class="panel search" style="height:55px" id="search-panel">
     <div class="main clearfix">
       <div class="clear"></div>

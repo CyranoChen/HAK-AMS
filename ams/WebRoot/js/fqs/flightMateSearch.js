@@ -66,6 +66,40 @@ $(document).ready(function () {
 
     });
 
+    
+    /**
+     * 20161215追加 时间段航班配对功能
+     */
+
+    $('#matchByDate_btn').on('click',function (){
+
+
+        $('#loader').jqxLoader('open');
+        
+        
+        var dateRange = $("#scheduledTime").val().split(" - ");
+
+        $.post(
+            "./flightMatchByDate?startTime=" + dateRange[0] + "&endTime=" + dateRange[1],
+            function(rtn){
+                $('#loader').jqxLoader('close');
+
+                if(rtn.success == true){
+                	alert('开始日期：' + rtn.msg.startTime + 
+                		  '\n结束日期：' + rtn.msg.endTime +
+                		  '\n总计航班：' + rtn.msg.total + 
+                		  '\n生成：' + rtn.msg.done + 
+                		  '\n缺少对应连班：' + rtn.msg.noLink);
+                }else{
+                	alert(rtn.msg);
+                }
+            }
+        );
+
+
+    });
+    
+    
     /**
      * 20161001追加 单条航班重新配载功能
      */
@@ -140,7 +174,6 @@ $(document).ready(function () {
         $(this).removeAttr("editable");
     })
 
-
     var loadDataFirst = true;
     var loadData = function (id){
 
@@ -179,16 +212,11 @@ $(document).ready(function () {
                                 }
                                 g.jqxGrid("updaterow",flightId,rowdata);
                             }
-
                         },
-
                         async : false,
                         type : "post"
 
-
                     });
-
-
 
                 }
             },
@@ -217,7 +245,9 @@ $(document).ready(function () {
                 { name: 'yj', type: 'string' },
                 { name: 'hw', type: 'string' },
                 { name: 'wjhz', type: 'string' },
-                { name: 'xljs', type: 'string' }
+                { name: 'xljs', type: 'string' },
+                { name: 'legno', type: 'string' },
+                { name: 'generateMethod', type: 'string' }
             ],
             id : "id"
         });
@@ -242,6 +272,35 @@ $(document).ready(function () {
                 );
             });
 
+            //$('#addLoadData').jqxButton({
+            //    width : 50,
+            //    height : 25,
+            //}).on('click',function (){
+            //    $.post(
+            //        "./addLoadData",
+            //        function(rtn){
+            //            $('#jqxGrid').jqxGrid('addrow', rtn.id, rtn);
+            //        }
+            //    )
+            //
+            //});
+            //
+            //
+            //$('#deleteLoadData').jqxButton({
+            //    width : 50,
+            //    height : 25,
+            //}).on('click',function (){
+            //    var grid = $("#loadData");
+            //    var cell = grid.jqxGrid('getselectedcell');
+            //    var id = grid.jqxGrid('getrowid', cell.rowindex);
+            //    alert(id);
+            //});
+            //
+            //
+            //if(role != "1"){
+            //    $("#addLoadData,#deleteLoadData").hide();
+            //}
+
             g.jqxGrid({
                 height: tabHeight - 70,
                 width: '99%'  ,
@@ -256,7 +315,6 @@ $(document).ready(function () {
                     var item = [
                         { text: '航段信息', datafield: 'hd',align:"center",cellsalign:"center",editable:false },
                         //{ text: '航段性质', datafield: 'hdfl',align:"center",cellsalign:"center",editable:false },
-
                         { text: '成人', datafield: 'cr',align:"center",cellsalign:"center",editable:true },
                         { text: '儿童', datafield: 'et',align:"center",cellsalign:"center",editable:true },
                         { text: '婴儿', datafield: 'ye',align:"center",cellsalign:"center",editable:true },
@@ -276,6 +334,7 @@ $(document).ready(function () {
 
                         { text: '最大业载', datafield: 'zdyz',align:"center",cellsalign:"center",editable:false },
                         { text: '最大座位', datafield: 'zdzw',align:"center",cellsalign:"center",editable:false }
+                        //{ text: '标识', datafield: 'generateMethod',align:"center",cellsalign:"center",editable:false }
                         //{ text: '配额业载', datafield: 'peyz',align:"center",cellsalign:"center",editable:false },
                         //{ text: '配额座位', datafield: 'pezw',align:"center",cellsalign:"center",editable:false },
                         //{ text: '配额业载', datafield: 'kgyz',align:"center",cellsalign:"center",editable:false },
@@ -291,7 +350,6 @@ $(document).ready(function () {
                         var m = item[i];
                         if(m['editable']){
 
-
                             if(hasPermission){
                                 m['columntype'] = 'numberinput';
                                 var decimalDigits = m.hasOwnProperty("decimalDigits") ? m["decimalDigits"] : 0;
@@ -302,6 +360,7 @@ $(document).ready(function () {
                                         editor.jqxNumberInput({ inputMode: 'simple', spinButtons: true,spinButtonsStep:1,decimalDigits:d,theme:"arctic",spinButtonsWidth:25,min:0,max:99999999 });
                                     };
                                 })(decimalDigits);
+
 
                             }else{
                                 m['editable'] = false;
@@ -373,7 +432,28 @@ $(document).ready(function () {
      */
     $("#flightDirection,#standFlag,#airlineHandler").jqxDropDownList({ width: 60, height: 25,theme:"arctic"});
     $("#flightIdentity,#airLineName,#registeration").jqxInput({ width: 50, height: 25,theme:"arctic",maxLength : 20 });
-    $("#error").jqxDropDownList({ width: 155, height: 25,theme:"arctic" });
+    $("#error").jqxDropDownList({
+        width: 120,
+        height: 25,
+        theme:"arctic",
+        filterable : true,
+        searchMode : 'containsignorecase',
+        filterPlaceHolder : "",
+        placeHolder : "全部航班",
+        itemHeight : 30,
+        checkboxes : true
+    });
+    //$("#error").on("checkChange",function (event){
+    //    var item = event.args.item;
+    //    if(item.value == ""){
+    //        if( item.checked){
+    //            $(this).jqxDropDownList('checkAll');
+    //        }else{
+    //            $(this).jqxDropDownList('uncheckAll');
+    //        }
+    //    };
+    //});
+
     $("#scheduledTime").jqxDateTimeInput({
         formatString: "yyyy/MM/dd",
         showCalendarButton: true,
@@ -549,6 +629,7 @@ $(document).ready(function () {
             scheduledTime : $("#scheduledTime").val(),
             error : $("#error").val()
         };
+
 
 
 
@@ -896,6 +977,17 @@ $(document).ready(function () {
                                 $this.val("");
                                 return;
                             }
+
+                            if(colname == "firstClassCount" || colname == "vipCount" || colname == "vipFirstAirdromeUsedCount"){
+                                var n = Number(value);
+                                if(n < 0 || n > 100){
+                                    alert("参数范围在0-100之间");
+                                    $this.focus();
+                                    $this.val("");
+                                    return;
+                                }
+                            }
+
                         }
 
                         updateInfo($this.parent().attr("colname"),$this.val(),function (rtn){
